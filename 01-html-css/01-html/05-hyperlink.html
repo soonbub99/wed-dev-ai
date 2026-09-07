@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>하이퍼링크</title>
+  </head>
+  <body>
+    <!--
+       - href : 이동할 주소 
+       - target="blank" : 새 탭에서 열기
+       -->
+    <h2>외부 링크</h2>
+    <a href="https://www.google.com/" target="_blank">구글로 이동</a>
+    <h2>내부링크</h2>
+    <ul>
+        <li><a href="02-text-tag.html"target="blank">택스트 테그</a> 
+            <li><a href="./03-list-tag.html"target="blank">목록 태그</a></li>
+        </li>
+    </ul>
+    <h2>이미지 링크</h2>
+    <a href="https://www.mega-mgccoffee.com/">
+        <img src="https://img.79plus.co.kr/megahp/common/img/new_logo.png" alt="">
+    </a>
+    <h2 id="top">페이지 안에서 이동</h2>
+   <!-- ul>(li>a)*3 -->
+    <ul>
+        <li><a href="#section1">섹션 1</a></li>
+    <li><a href="#section">섹션 2</a></li>
+    <li><a href="#section">섹션 3</a></li>
+    </ul>
+    <h3 id="section1">섹션 1</h3>
+    <p>첫 번째 섹션 입니다.</p>
+    <div style="height: 600px"></div>
+    
+    <h3 id="section2">섹션 2</h3>
+     <p>두 번째 섹션 입니다.</p>
+    <div style="height: 600px"></div>
+    
+    <h3 id="section3">섹션 3</h3>
+     <p>세 번째 섹션 입니다.</p>
+    <div style="height: 600px"></div>
+    <a href="#top">위로 이동
+
+    </a>
+    </body>
+</html>
