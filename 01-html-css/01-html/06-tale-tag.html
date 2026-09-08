@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>표태그</title>
+</head>
+<body>
+    <h2>기본 표</h2>
+    <table border="1">
+        <!-- tr(table row) : 가로 한 줄 -->
+        <tr>
+            <!-- th : 제목칸 (굵게,가우데 ) -->
+            <th>브라우저</th>
+            <th>제조사</th>
+            <tr>
+                <!-- td : 일반 데이터칸-->
+                <td>Chrome</td>
+                <td>구글</td>
+            </tr>
+            <tr>
+                <td>Safari</td>
+                <td>애플</td>
+            </tr>        
+        </tr>
+    </table>
+    <h2>행/열 합치기</h2>
+        <table border="1">
+        <!-- rowspan : 아래로 어느 정도 -->
+            <th rowspan="2">이름</th>
+            <td>루이바오</td>
+            
+            <tr>
+                <td>후이바오</td>
+                        
+            </tr>
+            
+        </table>
+        <h2>테이블 구조</h2>
+        <table border="1">
+            <!-- caption : 표 제목-->
+            <caption>
+                바오 패밀리 친구들
+            </caption>
+            <!-- colfroup : 세로 열 묶음 -->
+            <colgroup>
+                <col />
+                <col style="background-color: yellow"/>
+                <col />
+            </colgroup>
+             <!-- thead : 제목줄,  tbody : 데이터줄 , tfoot : 합계 등-->
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>코식이</td>
+                    <td>36</td>
+                    <td>경기도 용인</td>
+                </tr>
+            <tr>
+                <td>제돌이</td>
+                <td>28</td>
+                <td>제주도</td>
+            </tr>
+        </tbody>
+            <!-- 리액트에서 작성하지 않으면 경고창-->
+            <tfoot>
+                <tr>
+                    <th colspan="2">총 마리수</th>
+                    <td>2</td>
+                    
+                </tr>
+            </tfoot>
+        </table>
+</body>
+</html>
