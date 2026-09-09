@@ -1,0 +1,68 @@
+/* font-family : 앞에서부터 있는 글꼴 사용, */
+.ff-sans{
+    font-family: sans-serif;
+}
+.ff-serly{
+    font-family: "궁서", serif;
+}
+/* font-size */
+.fs-px{
+    font-size:20px;
+}
+.fr-rem{
+    /* 16px * 1.5=24px */
+    font-size:1.5rem;
+}
+/* font-weoght */
+.fw-bold{
+    /* bold는 숫자로 700이랑 같음 */
+    font-weight: bold;
+}
+.fw-thin{
+    font-weight: 300;
+}
+/* line-height : 많이 쓰이는 기준이 1.5~1.8 */
+.lh{
+    line-height: 2;
+}
+/* text-align : lift(기본), center, right, justify */
+.ta-center{
+    text-align: center;
+}
+.ta-center{
+    text-align: right;
+}
+/* color */
+.c-name{
+    /* 브라우저가  인식하는 기본 색상명(wed safe colors
+    216가지 */
+    color: crimson;
+}
+.c-hex{
+    /* #RRGGBB - 범위 : 000000~ffffff */
+    color:#2f6fed;
+}
+.c-rgb{
+    /* red(0~255),green(0~255), blue(0~255) */
+    color: (47,111,237)
+    background:rgba(0, 0, 0, 5);
+}
+.c-hsl{
+    /* 색상환(0~360), 채도(0~100%), 밝기(0~100%) */
+    color: hsla(200, 50%, 50%, 0.2);
+}
+.td-underline{
+    text-decoration: underline;
+}
+.td-none{
+    text-decoration: none;
+}
+/* letter-spacing : 글자 사이 간격*/
+.ls{
+    letter-spacing: 20px;
+}
+/* text-shadow : 글자 그림자 */
+.shadow{
+    /* X축, Y축(아래일수록 숫자가 커짐), blur */
+    text-shadow: 5px 5px 5px red;
+}

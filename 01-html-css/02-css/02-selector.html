@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./02-selector.css" />
+  </head>
+  <body>
+    <h1>css 선택자</h1>
+
+    <h2>전체 선택자</h2>
+    <p>모든 요소</p>
+
+    <h2>태그 선택자</h2>
+    <p>같은 태그면 전부</p>
+
+    <h2>클래스 선택자</h2>
+    <div class="notice">클래스가 있는 요소만 배경색 변경</div>
+    <span class="notice">태그가 달라도 같은 클래스면 같은 스타일</span>
+
+    <h2>아이디 선택자</h2>
+    <div id="only-one">id는 페이지에 하나만(중복은 규칙 위반)</div>
+
+    <h2>그룹 선택자</h2>
+    <div class="group-a">group A</div>
+    <div class="group-b">group B</div>
+
+    <h2>조합 선택자- 자손/ 자식</h2>
+    <div class="combo">
+      <p>바로 안의 p</p>
+      <div><p>더 깊은 P</p></div>
+
+      <h2>형제 선택자</h2>
+      <div id="sib">형제 1</div>
+      <div class="sib">형제 2</div>
+      <div class="sib">형제 3</div>
+
+      <h2>속성 선택자</h2>
+      <input type="text">
+
+      <h2>상태 선택자</h2>
+      <button class="btn">hover</button>
+      <label>
+        <input type="checkbox" />
+        checkbox</label>
+
+      <input type="text" placeholder="focus" id="">
+      <h2>구조 선택자</h2>
+      <ul class="list">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+        <li>item 4</li>
+      </ul>
+      <h2>가상요소 선택자</h2>
+      <p class="badge">가상 요소</p>
+    </div>
+  </body>
+</html>

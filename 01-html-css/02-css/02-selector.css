@@ -1,0 +1,81 @@
+/* 전체 선택자 : * */
+* {
+  color: blue;
+}
+/* 태그 선택자 : 태그명 */
+p {
+  color: red;
+}
+/* 클래스 선택자 : .클래스명 */
+.notice {
+  background-color: yellow;
+}
+/* 아이디 선택자 : #아이디명 */
+#only-one {
+  background-color: lightblue;
+}
+/* 그룹 선택자 : ,(쉼표) */
+.group-a .group-b {
+  background-color: paleturquoise;
+}
+/* 자손 선택자 : 공백, 자식 선택자 : > */
+.combo p {
+  color: teal;
+}
+.combo > div > p {
+  font-weight: bold;
+}
+/* 형제 선택자 : + - 바로 다음,
+                ~ - 뒤에 있는 모든 형제 */
+
+#sib + .sib {
+  background: orange;
+}
+#sib ~ .sib {
+  color: brown;
+}
+/* 속성 선택자 : [속성] 또는 [속성="값"] */
+input[type="text"] {
+    background-attachment: mistyrose;
+}
+/* 상태 선택자
+  : hover - 마우스를 올렸을 때
+  : checked - 체크가 되었을 때
+  : focus - 클릭 되었을 때
+  : disabled - 비활성화 되었을 때
+*/
+  .btn: hover {
+  background : gold ;
+  }
+[type="checkbox"]:checked + span{
+color : purple ;
+}
+input:focus{
+    background-color: lightblue;
+}  
+button:disabled{
+    background-attachment: silver;
+}
+/* 구조 선택자 :
+ : first-child, :last-child, :nth-child */
+.list li:first-child {
+    background-color: yellow;
+}
+.list li:last-child{
+    background-color: orange;
+}
+/* odd - 홀수, even - 짝수 */
+.list li:nth-child(odd) {
+    background-color: lightblue;
+}
+/* 가상요소 선택자 : ::before(앞), ::after(뒤) */
+.badge::before{
+    content: "new";
+    background-color: black;
+    color: white;
+}
+.badge::after{
+    content: "hot";
+    background-color: red;
+    color: white;
+}

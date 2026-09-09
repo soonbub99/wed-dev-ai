@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css 연결 방식</title>
+    <style>
+      p {
+        color: red;
+      }
+    </style>
+    <link rel="stylesheet" href="./01-css-apply.css">
+    ;</style>
+  </head>
+  <body>
+    <h1>css연결 방식</h1>
+    <h2>inline</h2>
+    <p style="color: green">태그에 직접 suyle 속성으로</p>
+    <h2>internal</h2>
+    <p>같은 페이지에서 &lt;style&gt;</p>
+    <h2>external</h2>
+    <p class="external">HTML 밖 .css 파일을  &lt;link&gt; 태그로 연결</p>
+    <h2>왜 분리하나?</h2>
+    <p>HTML은 구조, CSS는 스타일. 나누면 스타일을 한 파일에서 고칠시 연결된
+        여러 페이지가 한꺼번에 반영
+    </p>
+  </body>
+</html>
