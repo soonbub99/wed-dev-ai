@@ -1,23 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+/* css 변수 : 색이나 폰트 등 한 번만 등록, 
+              사용하는 곳에서는 var() */
+:root {
+  --font: "Archivo Black", sans-serif;
+  --text-gray: #999;
+}
 h1 {
   text-align: center;
+  font-family: var(--font);
 }
-h2 {
+.date {
   text-align: center;
+  color: var(--text-gray);
 }
 .we {
+  font-family: var(--font);
   color: green;
 }
 .br {
   color: black;
 }
-h4 {
+.memo {
   font-weight: 400;
 }
 h5 {
   text-align: center;
   font-size: 1rem;
 }
-span {
+.meal span {
   font-weight: bold;
 }
 span1 {

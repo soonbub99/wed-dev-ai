@@ -1,0 +1,54 @@
+.box {
+  height: 200px;
+}
+/* background-color*/
+.bg-color {
+  background-color: blue;
+}
+/* background-image: 배경 이미지 */
+.pic {
+  background-image: url(../assets/panda.png);
+}
+/* background-repeat+positidn*/
+.bg-norepeat {
+  background-color: #333;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/* background-size
+  - cover : 비율 유지하며 영역을 꽉 채움 (넘치는 부분 잘림)
+  - contain : 비율 유지하며 사진이 다 보이게 (빈 공간 생김)
+*/
+.bg-cover {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* background-attachment:foxed- 배경 화면에 고정 */
+.bg-fixed {
+  background-attachment: fixed;
+}
+/* gradient : 색이 서서히 바뀌는 것
+ - linear-gracient : 각도,색깔,색깔,---
+ - radial-gracient : 모양, 색깔, 색깔, ----
+ */
+.bg-gradient {
+  background-image: linear-gradient(135deg, red, blue, yellow);
+  background-image: radial-gradient(circle, red, blue, yellow);
+}
+/* background-image에서 콤마로 나열 */
+.bg-overlay{
+    background-image:
+    linear-gradient(black,black,
+    url("../assets/panda.png"));
+}
+/* background-blend-mode : background-color+background-image */
+.bg-blend{
+    background-color: rgb(0, 0, 0 /0.45);
+    background-image:url(../assets/panda.png);
+    background-blend-mode: overlay;
+}
+/*background:color image repeat position / size */
+.bg{
+    background:#333 url(../assets/panda.png) no-repeat center / contain;
+}
