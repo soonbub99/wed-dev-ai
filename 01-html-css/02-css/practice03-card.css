@@ -1,0 +1,48 @@
+html {
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-color: rgba(113, 202, 236, 0.2);
+background-blend-mode: hue;
+}
+.box1{
+    width: 450px;
+    height: 700px;
+    border: 3px solid rgb(230, 238, 230);
+border-radius: 30px;
+margin: auto;
+margin-top: 70px;
+background-color: rgb(65, 156, 199);
+
+}
+.box2{
+    background-image: url(../assets/panda.png);
+    background-position: center;
+background-size: cover;
+width: 180px;
+height: 180px;
+border: 5px solid white;
+border-radius: 50%;
+margin: auto;
+margin-top: 50px;
+
+}
+.box3{
+width: 400px;
+height: 80px;
+border: 3px solid rgb(230, 238, 230);
+border-radius: 15px;
+margin: auto;
+margin-top: 230px;
+
+}
+.box4{
+width: 400px;
+height: 80px;
+border: 3px solid rgb(230, 238, 230);
+border-radius: 15px;
+margin: auto;
+margin-top: 10px;
+
+}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>박스모텔/display/position</title>
+    <link rel="stylesheet" href="06-box.css" />
+  </head>
+  <body>
+    <h2>width/height</h2>
+    <div class="box w-fixed">px 단위는 고정길이</div>
+    <div class="box w-parent">% 단위는 가변길이</div>
+    <h2>padding - 테두리와 내용 사이(박스 안쪽 여백)</h2>
+    <div class="box pad-all">padding: 20px</div>
+    <div class="box pad-parts">padding: 30px 20px 40px 10px</div>
+    <h2>margin- 요소와 요소 사이(박스 바깥 여백)</h2>
+    <div class="box mar-all">margin:24px</div>
+    <div class="box mar-all" style="margin-top: 48px">margin:24px</div>
+    <div class="box mar-auto">width:300px+margin:auto:가운데</div>
+    <!--margin collapse(상쇄) : 두 박스 사이가 더해지는 게 아니라 큰 갖ㅅ 하나로 합쳐진다. -->
+    <h2>border- 두께/종류(solid dashed dotted)/ 색</h2>
+    <div class="box bd-solid"></div>
+    <div class="box bd-round"></div>
+    <div class="box bd-circle"></div>
+    <h2>box-sizing:border-box</h2>
+    <div class="box bs-content">content-box</div>
+    <div class="box bs-border">border-box</div>
+
+    <h2>display</h2>
+    <span class="box d-span">display:block</span>
+    <span class="box d-span">display:block</span>
+    <div class="box d-div">display:inline</div>
+    <div class="box d-div">display:inline</div>
+
+    <h2>position</h2>
+    <p>relative:원래 자리 기준으로 이동</p>
+    <div class="pos-outer">
+      <div class="pos-box relative">relative</div>
+    </div>
+  </body>
+</html>

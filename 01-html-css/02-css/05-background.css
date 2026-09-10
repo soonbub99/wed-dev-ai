@@ -39,7 +39,9 @@
 /* background-image에서 콤마로 나열 */
 .bg-overlay{
     background-image:
-    linear-gradient(black,black,
+    linear-gradient(
+        rgba(0,0,0, 0.45),
+        rgba(0,0,0,  0.45),
     url("../assets/panda.png"));
 }
 /* background-blend-mode : background-color+background-image */

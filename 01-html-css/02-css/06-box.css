@@ -1,0 +1,128 @@
+.box{
+    background-color: azure;
+    border: 1px solid;
+    margin-bottom: 10px;
+}
+/* width:너비(가로), height: 높이(세로) */
+.w-fixed{
+    width: 200px;
+    height: 100px;
+}
+.w-perent{
+    width: 50%;
+    height: 100px; /* 부모의 값이 있어야  % 계산이 가능 */
+
+}
+.pad-all{
+    padding: 20px;
+}
+.pad-parts{
+    /*top:위  , right:오른쪽  , bottom:아래  , left: 왼쪽*/
+    padding-left: 10px;
+    /*값이 4개- 위 오른쪽 아래 왼쪽(시계방향)*/
+    padding: 30px 20px 40px 10px;
+      /*값이 3개- 위 오른쪽 아래 왼쪽(시계방향)*/
+    padding: 30px 20px 40px;
+       /*값이 3개- 위 아래(시계방향)*/
+    padding: 30px 20px;
+}
+/* margin*/
+.mar-all{
+    /*margin도 padding처럼 -top, -right. -bottom, - l*/
+    margin: 24px;
+}
+.mar-auto{
+    width: 300px;
+    margin: auto;
+}
+/* bdrder */
+.bd-solid{
+    width: 90px;
+    height: 90px;
+    border: 3px solid red; /* solid: 실선 */
+}
+.bd-round{
+    width: 90px;
+    height: 90px;
+    border: 3px dashed green;
+/* dashed: 점선*/
+border-radius: 10px;
+}
+.bd-circle{
+    width: 90px;
+    height: 90px;
+    border: 3px dotted blue;/*dotted:점*/
+    border-radius: 50%; /*사각형을 원으로*/
+}
+/*box-sizing*/
+.bs-content,
+.bs-border{
+    width: 200px;
+    height:80px;
+    padding: 20px;
+    border:5px solid rgb blue;
+}
+.bs-content{
+    /*기본값- width :내용만->실제길이: 200+20*2+5*2=250 */
+    box-sizing: content-box;
+}
+.bs-border{
+    /* width: 테두리까지 ->실제길이 : 200 */
+    box-sizing: border-box;
+}
+.d-span{
+    display: block;
+}
+.d-div{
+    /* inline- width/height X, 
+    inline-block -> 가능은 하지만 요즘은 사용 않함(뒤에 나올 flex)*/
+    display: inline;
+    width: 100px;
+    height: 100px;
+}
+/*position */
+.pos-outer{
+    height: 250px;
+    border: 1px;
+    background: #f6f6f6;
+
+}
+.pos-box{
+    width: 100px;
+    height: 60px;
+    color: #fff;
+}
+.relative{
+    background-color: navy;
+    position: relative;
+    top: 10px;
+    left: 10px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
