@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+   /* height: 100vh; vh : 뷰높이 */
+background-color: rgb(0, 0, 0 / 0.45);
+background-image: url(../assets/bg.jpg);
+background-repeat:no-repeat;
+background-position: center;
+background-size: cover;
+background-attachment: fixed;
+color: white;
+text-align: center;
+/* 텍스트, 이미지만 가운데 */
+}
+h1{
+font-size: 4rem;
+}
+p{
+    color: bisque;
+}

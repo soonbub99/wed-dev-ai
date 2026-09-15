@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문</title>
+</head>
+<body>
+    <h1>조건문</h1>
+    <h2>if/else</h2>
+    <script>
+        /*
+        if(조건) {
+        조건이 true
+        } else{ 조건이 false }
+        */
+       let age = 15;
+       // 나이가 19세보다 많으면 "성인", 아니면 "미성년자"
+       //if(나이가 19세보다 많으면){console.l("성인")}
+        if(age>19){
+            console.log("성인");
+        } else {
+            console.log("미성년자");
+        }
+
+        // 상항 연산자 : 조건 ? 조건이 true : 조건이 false
+        const result = age >19 ? "성인": "미성년자";
+        console.log(result);
+    </script>
+
+    <h2>else if</h2>
+    <script>
+        /*
+          if(조건A) {
+          } else if(조건 B) {
+            (조건A가 false이면서) 조건B가 true
+           } else if(조건 C) {
+            (조건A, 조건B가 false이면서) 조건 C가 true
+            } else {
+             모든 조건이 false
+             }  
+              ->if 써도 가능!
+              ->else 생략 가능!
+              ->else if는 여러개가 올 수 있음
+                  */
+                 // 20세 이상이면 성인, 14세 이상이면 청소년,
+                 // 8세 이상이면 어린이, 그 외에는 유아
+                // age = prompt("나이를 입력해주세요");
+                 if(age>=20){
+                    console.log("성인")
+                 }else if(age>=14){
+                    console.log("청소년")
+                 }else if(age>=8){
+                    console.log("어린이")
+                 }else{
+                    console.log ('유아')}
+
+    </script>
+    <h2>switch</h2>
+    <script>
+        const number = 5;
+        // number값이 짝수이면 "짝수", 홀수이면"홀수"
+        // 그게 아니라면 "숫자가 아니다"
+        // -> 짝수라는 건 2로 나누었을 때 나머지가 0, 홀수는 나머지 1이면 홀수인것
+        // 홀수는 나머지 1, 2로 나누었을 때 나머지가 0이 아니거나
+        console.log(number % 2 === 0);
+        if(number % 2 === 0){
+            console.log("짝수");
+        } else if(number % 2 === 1) {
+            console.log("홀수");
+        } else {
+            console.log("숫자가 아니다")
+        }
+        /*
+          switch(데이터){
+            case 조건 A(값):
+                조건 A가 true
+                break;
+            case 조건 B(값):
+                조건B가 true
+                break;
+            default:
+                모든 조건이 false    
+          }
+            "switch문에서 break를 안 쓰면 어떻게 되나요?"
+        */
+        switch(number % 2){
+            case 0:
+                 console.log("짝수");
+                 break;
+            case 1:
+                 console.log("홀수");
+                 break;
+            default:console.log("숫자가 아니다");
+        }
+
+         </script>
+</body>
+</html>

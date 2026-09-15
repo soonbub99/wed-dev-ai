@@ -34,8 +34,25 @@
 
     <h2>position</h2>
     <p>relative:원래 자리 기준으로 이동</p>
+    <p>absolute : 가장 가까운 부모가 posotion: relative  기준( 없으면 화면)</p>
+    <p>fixed : 화면(뷰포드) 기준, 스크롤해도 고정</p>
+    <p>sticky : 스크롤하다가 지정 위치 닿으면 고정</p>
     <div class="pos-outer">
       <div class="pos-box relative">relative</div>
+      <div class="pos-box absolute">absolute</div>
+      <div class="pos-box fixed">fixed</div>
+      <div class="pos-box sticky">sticky</div>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias reiciendis error laboriosam, quisquam blanditiis perferendis excepturi consequatur nulla libero doloribus ut iure aliquam, aperiam nisi maiores cumque eveniet harum molestiae quia sint distinctio eligendi, hic expedita nostrum? Possimus repellat ad repudiandae perferendis ipsum nam omnis in ullam? Odit magni soluta repellendus totam. Atque laboriosam provident quidem temporibus sequi ea minima id ex labore. Sit dolor animi quis quo voluptatum debitis, quia libero nostrum praesentium eos repellat saepe necessitatibus unde, minus repudiandae officia earum dignissimos ipsam nemo eveniet quibusdam! Perspiciatis odio, mollitia est unde similique molestiae nesciunt! Quia illo cupiditate animi.</p>
+
     </div>
+    <h2>overflow- 박스보다 내용이 넘치는 경우</h2>
+    <div class=" box of-hidden">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita sint culpa assumenda odio quos ad labore, eligendi, laborum nesciunt minus cumque aliquam ea aperiam consequatur doloribus animi qui quisquam ut.</div>
+    <div class="box of-hidden">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet expedita sequi consectetur ullam sint inventore atque, omnis molestiae delectus qui quibusdam minima corporis earum dolor rem quidem. Iusto, cumque architecto.</div>
+
+    <h2>visidility:hidden vs display:none</h2>
+    <div class="box hidden">보통 박스</div>
+    <div>visidility: hidden</div>
+    <div class="box none"></div>
+    <div>display: none-자리도 없어짐</div>
   </body>
 </html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수와 연산자</title>
+</head>
+<body>
+    <h1>변수와 연산자</h1>
+    <h2>var, let, const</h2>
+    <script>
+        //변수:값을 담는 공간
+        //변수명= 값
+        //var랑 let/const의 차이가 뭐예요?
+        //var- 예전에 사용, 현재로써는 사용하는 걸 추천하지 않음
+        var oldvar = 1;
+        console.log(oldvar);
+        oldvar=2;
+        console.log(oldvar);
+
+        //let- 값을 바꿀 수 있는 변수에 사용(가끔)
+        let nickname = "권지원";
+        console.log(nickname)
+        nickname="김미래";
+        console.log(nickanme);
+
+        //const- 값을 바꿀 수 없는 변수에 사용(자주)
+        const name = "김소연";
+        console.log(name);
+        name="황건영";
+    </script>
+
+    <h2>자료형과 typeof</h2>
+    <script>
+        const userId = "김진아"; //문자열-string( 'or" )
+        console.log(typeof userId);
+        const age = 15; // 숫자 - number
+        console.log(typeof age);
+        let check = true; //논리형- boolean(참 or 거짓)
+        check = false;
+        console.log(typeof check);
+        let unknown; //값이 정의되지 않음 - undefined
+        console.log(typeof unknown);
+        let isNone = null; // 값이 없음 - null
+        console.log(typeof isNone); //type은 object - 객체
+    </script>
+
+    <h2>템플릿 리터럴</h2>
+    <script>
+        const hobby = "게임";
+        console.log("내 취미는 "+hobby+"입니다.")
+        console.log(`내 취미는 ${hobby} 입니다.`)
+    </script>
+
+    <h2>숫자</h2>
+    <script>
+        const num1 = 10;
+        const num2 = 3;
+        console.log(num1+num2); // 13
+        console.log(num1-num2); // 7
+        console.log(num1*num2); // 30
+        console.log(num1/num2); // 3.33333...
+        console.log(num1 % num2); // 1-나머지
+
+        // 소수 제거 -> 정수
+        console.log(parseInt(num1/num2)); //3
+
+        // 문자 -> 숫자
+        console.log(typeof Number("100"));
+        console.log(Number("Hello")); // NaN (Not a Number) 
+
+        // 숫자 -> 문자
+        console.log(typeof String(100));
+
+        // 실수로 변환
+        console.log(typeof parseFloat("3.14"));
+    </script>
+
+    <h2>Boolean과 비교 연산자</h2>
+    <script>
+        console.log(true, false);
+
+        // Boolean 변환
+        //false인 경우 : 0, ``, undefined, null, NaN
+        // 그 외에는 true
+        console.log(Boolean("Hello")); //true
+        console.log(Boolean("")); // false
+
+        console.log(Boolean(0)); // false
+        console.log(Boolean(1)); // true
+
+        const a = 100;
+        const b = "100";
+        // ==와 ===의 차이는?
+        console.log(a == b); // true
+        console.log(a === b); // false (타입까지 비교)
+        
+        // 같지 않은가? ( != )
+        console.log(a != b); // false
+        console.log(a !== b); // true (타입까지 비교)
+
+        const c = 200;
+        console.log(a,c); // 100< 200 - true
+        console.log(a > c); // false
+        console.log(a <= c); // 100보다 200이 크거나 같은가?
+        console.log(a >= c); // 100보다 200이 작거나 같은가?
+    </script>
+
+    <h2>논리 연산자</h2>
+    <script>
+        const x = 10;
+        const y = 20;
+
+        // && : 그리고(and)- 특징이 둘 다 true이어야 true가 됨
+        console.log(x < 15 && y > 10); // true
+        console.log(x > 15 && y > 10); // false
+
+        console.log("javascript" && 12345); // 12345
+        console.log("" && 12345); // ""
+
+        // || : 또는(or) - 둘 중 하나라도 true 이면 true
+        console.log(x < 15 || y > 10); // true
+        console.log(x > 15 || y > 10); // true
+
+        console.log(null || "js"); // js
+        console.log(1 || "js"); // 1
+
+        // --> 단축 평가(Short circuit evaluation)
+        //    - 앞의 값에 따라 뒤의 값을 평가할지 말지 결정
+        // 로그인 상태 확인, 입력값 검증
+    </script>
+</body>
+</html>

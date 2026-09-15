@@ -1,48 +1,55 @@
-html {
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-color: rgba(113, 202, 236, 0.2);
-background-blend-mode: hue;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.box1{
-    width: 450px;
-    height: 700px;
-    border: 3px solid rgb(230, 238, 230);
-border-radius: 30px;
-margin: auto;
-margin-top: 70px;
-background-color: rgb(65, 156, 199);
+/*전체 선택 *{} */
+body{
+    height: 100vh;
+    background: linear-gradient(150deg,#1f7a4d,#2f5d8f);
+    padding-top: 20px;
 
 }
-.box2{
+.card{
+    /* opacity: 50%; -> 안에 요소들까지 투명하게 됨으로.. */
+    text-align: center;
+    padding: 20px;
+    width: 400px;
+    height: 300px;
+    margin: auto; 
+
+    /*해당 요소가 가로 크기를 가지고 있으면 균등하게 여백 지정 */
+    /* border, baekground 투명하게, 위에 띄워져 있어야 할 것 같고..*/
+    border: 1px solid rgba(255, 255, 255, 50%);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 25%);
+}
+img{
+    margin:bott;
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+     border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 70%);
+}
+.profile{
+    /* 프로필 이미지 - 동그라미,border */
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 70%);
+    width: 90px;
+    height: 90px;
+    margin: auto;
     background-image: url(../assets/panda.png);
+    background-size: cover;
     background-position: center;
-background-size: cover;
-width: 180px;
-height: 180px;
-border: 5px solid white;
-border-radius: 50%;
-margin: auto;
-margin-top: 50px;
-
 }
-.box3{
-width: 400px;
-height: 80px;
-border: 3px solid rgb(230, 238, 230);
-border-radius: 15px;
-margin: auto;
-margin-top: 230px;
-
+.desc{
+    border-bottom: 1px solid white ;
+    padding: bottom 10px;
+    
 }
-.box4{
-width: 400px;
-height: 80px;
-border: 3px solid rgb(230, 238, 230);
-border-radius: 15px;
-margin: auto;
-margin-top: 10px;
-
+a{
+    display: block;
+    text-decoration: none;
+    color: inherit;
 }

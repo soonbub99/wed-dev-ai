@@ -1,0 +1,78 @@
+/* display: flex는 밭드시 부모에게 주어야 한다*/
+.container {
+  background-color: #eef1f5;
+  display: flex;
+}
+.item {
+  padding: 10px 15px;
+  border: 2px solid;
+  background-color: white;
+}
+/* 무족건 부모한테 flex-direction:
+    - row(기본값),row-reverse,column,column-reverse */
+.column {
+  flex-direction: column;
+}
+/* 부모한테
+   justify-conthnt
+   - start(기본값),end,center,
+   - spacd-between(양끈),space-around,space-evenly
+   align-items
+   - start(기본값),start, end, center,baseline
+*/
+.align {
+  height: 200px;
+  flex-direction: column;
+  /* flex-direction에 따라서 주축과 교차축이 바뀜 */
+  justify-content: space-between; /* 주축 */
+  align-items: start; /* 교차축 */
+}
+/* 부모한테flex-wtap
+   - nowrap(기본값- 찌그러트림), wrap
+ */
+.wrap {
+    height: 200px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* align-content는 줄바꿈 사용
+   - justify-content에서 사용하는 값들 동일 */
+  align-content: space-around;
+}
+.wrap .item {
+  width: 150px;
+}
+/* 부모한테 gap */
+.gap{
+   gap: 10px;
+    /* margin과으 차이점은 바깥쪽 여백은 안생김 */
+}
+/* 여기부터는 자식한테 주는 속성들 */
+.grow-1{
+    flex-grow: 1;
+}
+.grow-2{
+    flex-grow: 2;
+}
+.shrink .item{
+    width: 300px;
+     /* 아이템 주축 시작 크기 width와 유사 */
+
+}
+.shrink-0{
+    flex-shrink: 0;
+}
+.flex-1{
+    flex: 1;
+    /* = flex : 아이템들을 균등하게 */
+}
+.order-self{
+    height: 200px;
+    align-items: center;
+}
+.order{
+    order: -1;
+    /* 기본값이 0, 작은수록 앞으로 */
+}
+.self{
+    align-self: end;
+}
