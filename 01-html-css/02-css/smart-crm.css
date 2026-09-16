@@ -42,15 +42,15 @@ header {
     grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
 }
 .box 1{
-  background-color: azure;
-  border: 1px solid;
-  margin-bottom: 15px;
-  border-radius: 15px;
-  border: 3px solid rgba(255, 255, 255, 70%);
-  width: 90px;
-  height: 90px;
-  margin: auto;
-  background-image: url(../assets/뉴스.png);
-  background-size: cover;
-  background-position: center;
+    background-image: url(../assets/뉴스.png)
+    width: 140px;
+    height: 140px;
+    background: #333;
+    color: white;
+    display: flex;
+    align-items: content ;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.2rem;
+
 }
