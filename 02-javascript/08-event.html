@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이벤트</title>
+    <link rel="stylesheet" href="./08-event.css" />
+    <!-- defer은 DOMContentLoaded-->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script src="./08-event.js" defer></script>
+  </head>
+  <body>
+    <h1>이벤트</h1>
+    <h2>클릭 이벤트</h2>
+    <section>
+      <div class="box" id="click">Click!</div>
+      <div class="box" id="double">Double Click!</div>
+      <div class="box" id="right">Right Click!</div>
+      <div class="box" id="hover">Hover!</div>
+      <div id="mouseDot"></div>
+    </section>
+
+    <h2>스크롤 이벤트</h2>
+    <div id="wheel">휠을 움직여보세요!</div>
+    <div id="scroll"></div>
+
+    <h2>키보드 이벤트</h2>
+    <input type="text" id="key" />
+    <p id="keyResult"></p>
+    <div class="moveBox"></div>
+
+    <h2>품 이벤트</h2>
+    <form action="" id="form"></form>
+    <input type="text" id="input" />
+    <p id="inputResult"></p>
+    <select name="" id="select">
+      <option value="사과">사과</option>
+      <option value="블루베리">블루베리</option>
+    </select>
+    <p id="selectResult"></p>
+    <button type="submit">제출</button>
+
+    <h2>모달</h2>
+    <button id="openModal">모달 열기</button>
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal-box">
+        <h3>모달 제목</h3>
+        <p>모달 내용입니다. 배경(어두운 부분)을 클릭하면 닫혀요!</p>
+        <button id="closeModal">단기</button>
+      </div>
+    </div>
+    <div x-data="{open:false}">
+      <button @click="open=true">모달(Alpine) 열기</button>
+      <div class="modal-overlay" :class="{open:open}" @click.self="open=false">
+        <div class="modal-box">
+          <h3>Alpine</h3>
+          <p>모달 내용입니다. 배경(어두운 부분)을 클릭하면 닫혀요!</p>
+          <button @click="open=false">단기</button>
+        </div>
+      </div>
+    </div>
+
+    <h2>탭 전환</h2>
+    <div x-data="{tab: 'a'}">
+      <button class="tab-btn" :class="{active: tab === 'a'}" @click="tab='a'">
+        소개
+      </button>
+      <button class="tab-btn" :class="{active: tab === 'b'}" @click="tab='b">
+        예약
+      </button>
+      <div x-show="tab ==='a'">소개 내용입니다.</div>
+      <div x-show="tab === 'b'">예약할 수 있는 곳입니다.</div>
+    </div>
+
+    <h2>아코디언</h2>
+    <div x-data="{open:null}">
+      <div>
+        <button
+          class="accordion-header"
+          :class="{ active  : open === 0 }"
+          @click="open = open === 0 ? null : 0"
+        >
+          섹션 1
+        </button>
+        <div
+          class="accordion-boby"
+          :class="{open: open === 0}"
+          x-show="open === 0"
+        >
+          섹션 1 내용입니다.
+        </div>
+      </div>
+      <div>
+        <button
+          class="accordion-header"
+          :class="{ active  : open === 1 }"
+          @click="open = open === 1 ? null : 1"
+        >
+          섹션 2
+        </button>
+        <div
+          class="accordion-boby"
+          :class="{open: open === 1}"
+          x-show="open === 1"
+        >
+          섹션 2 내용입니다.
+        </div>
+      </div>
+    </div>
+
+    <h2>슬라이드</h2>
+    <!-- Slider main container -->
+    <div class="swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+        ...
+      </div>
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
+
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- If we need scrollbar -->
+      <div class="swiper-scrollbar"></div>
+    </div>
+  </body>
+</html>

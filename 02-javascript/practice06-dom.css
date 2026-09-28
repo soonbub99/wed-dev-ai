@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+}
+body {
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  gap: 10px;
+}
+h1 {
+  font-size: 6rem;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2rem;
+}
