@@ -38,21 +38,20 @@ editDiv.removeAttribute("data-test"); //속성 삭제
 const result1 = document.querySelector("#result1");
 function printText(){
  result1.textContent = "안녕하세요";
-}
+};
 
 //input 값 출력
 const result2 = document.querySelector("#result2");
 const customer = document.querySelector("#customer");
 const printInputValue = function(){
    result2.textContent = customer.value;
-}
+};
 
 //문자열 길이 출력
 const result3 = document.querySelector("#result3");
 const text = document.querySelector("#text");
 const stringLength = () => {
-    result3
-    .textContent = text.value.length;
+    result3.textContent = text.value.length;
 };
 
 // 스타일 조작
