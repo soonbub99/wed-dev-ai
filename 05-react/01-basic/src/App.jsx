@@ -1,5 +1,5 @@
 /*
-  npm create vite 프로젝트명
+  npm create vite 프로젝트명 (client)
   - Reacr, JavaScript 선택
 
   소스코드들은 src 폴더 안에 모두 들어있다
