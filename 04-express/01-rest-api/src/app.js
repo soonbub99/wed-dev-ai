@@ -72,20 +72,43 @@ app.get("/api/cars", async (req, res) => {
 
 // 정비이력 목록(maintenance_records) 목록
 //  GET http://localhost:4000/api/records
+//  GET http://localhost:4000/api/records?pl=218가 1826
 app.get("/api/records", async (req, res) => {
+  const plate = req.query.plate; // undefined 이거나 아니거나 -> 조건문
   const { rows } = await pool.query(
     `select plate, name, service_date, item, memo, cost
+             from maintenance_records m 
+             join cars c on c.id = m.car_id
+             where plate = coalesce($1, plate)`,
+    [plate],
+     );
+    /*
+     const { rows } =
+    await pool.query(`select plate, name, service_date, item, memo, cost
      from maintenance_records m 
-     join cars c on c.id = m.car_id`,
-  );
-  res.status(200).json(rows);
-});
+     join cars c on c.id = m.car_id`
+     ${plate ? "where plate = $1::text" : ""}`,
+     plate ? [plate] : [],
+     ); */
+     /*
+  let query tevt =`select plate, name, service_date, item, memo, cost
+     from maintenance_records m 
+     join cars c on c.id = m.car_id`;
+  let values = [];
+  if(plate !== undefined) {
+       querytext += ` where plate = $1::text`;
+       values.push(plate);
+       }
+    const { rows } = await pool.query(querytext, values); */
+    res.status(200).json(rows);
+    });
+
 // 차량  정보 1개 조회
 // GET http://localhost:4000/api/cars/1
 app.get("/api/cars/:id", async (req, res) => {
   // :id는 주소에서 바뀌는 자리 - /api/cars/3 이면 id는 '3'이고 req.params.id로 꺼낸다
   const id = Number(req.params.id);
-  const { rows } = await pool.query(`select * from cars where id = ${id}`);
+  const { rows } = await pool.query(`select * from cars where id = $1`, [id]);
   // 정보가 어차피 1개니까 배열 중에 첫번째 값(인덱스 0)만 가죠온다
   res.status(200).json(rows[0]);
 });
@@ -95,15 +118,10 @@ app.get("/api/cars/:id", async (req, res) => {
 app.get("/api/records/:id", async (req, res) => {
   const id = Number(req.params.id);
   const { rows } = await pool.query(
-    `select * from maintenance_records where id = ${id}`,
-  );
+    `select * from maintenance_records where id = $1`,
+    [id] );
   res.status(200).json(rows[0]);
 });
-
-// 정비이력 차량번호로 조회 (심화) - 결과가 여러개일 수도 있고 아닐 수도 있고
-// GET http://localhost:4000/api/records/car/1
-
-
 
 // ---> 개인 프로젝트에서는 테이블 1개에
 // 샘플 데이터 몇개만 추가해서 확인해보는 것도 좋습니다!
@@ -112,23 +130,65 @@ app.get("/api/records/:id", async (req, res) => {
 // insert into cars(plate, name, car_type, production_year, fuel, mileage)
 // Values('111가 1234','투싼','SUV','2025','가솔린','10')
 app.post("/api/cars", async (req, res) => {
-  // 예외처리 : DB가 죽어도 서버는 죽지 않게
-  try {
     const { plate, name, car_type, production_year, fuel, mileage } = req.body;
-    await pool.query(
+    // returning의 경우 해당하는 값이 바로 필요한 경우들 사용(대체로 PK인 id값)
+    const{ rows } = await pool.query(
       `insert into cars(plate, name, car_type, production_year, fuel, mileage) 
-    values($1, $2, $3, $4, $5, $6)`,
+    values($1, $2, $3, $4, $5, $6) returning id, plate`,
       [plate, name, car_type, production_year, fuel, mileage],
     );
-    res.status(201).json({ massage: "차량 등록 완료" });
-  } catch (error) {
-    if (error.code === "23505") {
-      return res.status(409).json({ massage: "이미 있는 번호판입니다" });
+    res.status(201).json({ massage: "차량 등록 완료", rows: rows });
+  });
+
+  // 차량 수정
+  // PUT http://localhost:4000/api/cars/3
+  app.put("/api/cars", async (req, res) => {
+    const id = req.params.id;
+    const { plate, name, car_type, production_year, fuel, mileage } = req.body
+    await pool.query(
+                 `update carsset plate = $1, name = $2,
+                  car_type=$3, production_year = $4,
+                  fuel = $5, mileage = $6, where id = $7`,
+          [plate, name, car_type, production_year, fuel, mileage],);
+      //res.status(200).json({message:"차량등록완료"});
+      //status  부분을 생략함ㄴ 알아서 200 코드 성공 처리!
+      //res.json({message: 차량등록완료});
+      res.sendStatus(200); //상태 코드만 보내고자 할 때
+  });
+
+  // 차량 삭제
+  // DELETE http://localhost:4000/api/cars/2
+  // listen : 서버 켜기 - rpm run dev : nodemon src/app.js
+  app.delete("/api/cars", async (req, res) => {
+    const id = req.parnms.id;
+    // rowCount : 해당 쿼리문을 실행했을 때 반영된 개수
+    const { rowCount} = await pool.query(`delete fron cars where id = $1`, [id]);
+    if (rowCount ===0){
+      const err = new Error ("그런 차량이 없어요 ㅠㅠ");
+      err.status = 404;
+      throw err; //에러를 일부로 발생시키는 
     }
-    res.status(500).json({ message: "차량 등록하지 못했습니다" });
-  }
+   /* if ( rowCount === 0) {
+    return res.status(404).json({ message: "그런 차량이 없어요 ㅠㅠ"});
+    } */
+    res.sendStatus(204);
 });
 
+//라우트에서 난 오류가 전부 여기로 오기 때문에 라우트들 보다는 아래에 있으면 된다
+//app.use 안에 파라미터가 4개면 에러 처리기로 인식한다
+app.use((err, req, res, next) => {
+  if(error.code === '23505'){
+    // unique 위반
+    return res.sratus(409).json({ message: "이미 존재하는 값입니다."});
+  }
+  if(error.status === 404) {
+    return res.status(404).json({ message: error.message});
+  }
+  console.log(error);
+  res.status(500).json({ message: "서버 문제 발생", error: error });
+  });
+  
+ 
 // listen : 서버 켜기 - npm run dev : nodemon src/app.js  (예;가계오픈입니다)
 app.listen(4000, () => {
   console.log("서버 실행 중 : http://localhost:4000");
