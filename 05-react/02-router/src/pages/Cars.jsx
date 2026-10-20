@@ -1,38 +1,13 @@
+/*
+  페이지 컴포넌트 = 화면 한 장을 그리는 함수
+  - 이름은 대문자로 시작(소문자면 React가 HTML 태그인 줄 안다)
+  - 맨 아래 export default 함수명 -> router.jsx가 가져다 쓸 수 있게 내보내기
+*/
+//vehicle-management.html의 body 안에 태그들
 const Cars = () => {
   return (
-    <>
-      <header>
-        <div className="header-left">
-          <button
-            type="button"
-            className="menu-toggle"
-            id="menuToggle"
-            aria-label="메뉴 열기"
-            aria-expanded="false"
-          >
-            <span className="hamburger-bar"></span>
-            <span className="hamburger-bar"></span>
-            <span className="hamburger-bar"></span>
-          </button>
-          <a href="./index.html" className="logo">
-            정비노트
-          </a>
-          <nav id="navMenu">
-            <a href="./index.html">대시보드</a>
-            <a href="./vehicle-management.html" className="active">
-              차량관리
-            </a>
-            <a href="./maintenance-history.html">정비 이력</a>
-            <a href="./customer-consultation.html">고객 상담</a>
-          </nav>
-        </div>
-        <div className="header-right">
-          <div className="no-profile">김</div>
-          <span className="user-name">김정비 사장님</span>
-        </div>
-      </header>
-      <div className="menu-overlay" id="menuOverlay"></div>
-      <main>
+
+       <main>
         <section className="title-section">
           <div>
             <h1>차량 관리</h1>
@@ -243,7 +218,7 @@ const Cars = () => {
           </div>
         </section>
       </main>
-    </>
+
   );
 };
 export default Cars;
