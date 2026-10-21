@@ -1,3 +1,14 @@
+/*
+   shadcn/ui : 버튼, 입력칸, 표, 모달, 토스트(알림), 달력 등
+               수십 개 부품(컴포넌트)을 준다
+               -> 필요한 것만 add 해서 가져오면 끝!
+
+세팅 (한 번만 하면 됩니다.)
+1. jsconfig.json 파일 추가
+2. vite.config.js 설정 추가
+3. npx shadcn@latest init
+ */
+import { toast, Toast } from "@/components/ui/toast";
 import { Link, useNavigate } from "react-router";
 //Link는 바로 이동, useNavigate는 코드를 걸쳐서 이동
 const Login = () => {
@@ -6,6 +17,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //지금 서버가 없어서 원래는 서버 갔다가 온 후
+    toast.add({ title: "로그인 성공했습니다!!" });
     navigate("/");
   };
 
