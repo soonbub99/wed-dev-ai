@@ -35,6 +35,7 @@ backend/
 import express from "express"; //서버
 import pg from "pg"; // DB 연결
 import "dotenv/config"; // .env 파일 읽어냄
+import cors from "cors";
 
 const app = express(); // 서버를 만드는 함수 - 서버 1대
 
@@ -46,6 +47,9 @@ const pool = new pg.Pool({
   // ssl : 인터넷으로 주고받는 데이터를 암호화해서 중간에 훔쳐 읽지 못하게 하는 기술
   ssl: { rejectUnauthorized: false },
 });
+
+// cors : 이 주소에서 오는 요청은 받아도 된다고 브라우저에 허락
+app.use(cors({ origin: "http://localhost:5173" }));
 
 // use : 모든 요청이 라우트에 닿기 전에 먼저 거치는 공통 처리를 등록
 app.use(express.json()); // 요청 본문(JSON)을 읽어 req.body에 추가
@@ -66,7 +70,30 @@ app.get("/api/cars", async (req, res) => {
   // await pool.query("SQL문 - select, insert, update, delete") <- SQL 주문서 전달
   // await : 주문한 음식이 나올 때까지 기다림
   // const { rows } : 결과 묶음에서 rows (결과 행들)만 꺼내서 변수에 담음
-  const { rows } = await pool.query("select * from cars");
+  /* 백앤드에서 날짜 처리시
+  const { rows: cars } = await pool.query(`select_id, plate, name, car_type,
+                                           production_year, fuel, mileage,
+                                           to_char(latest_service_date, 'YYYY-MM-DD') as service_cate
+                                           from cars`);
+  */
+  const { rows: cars } = await pool.query(`select * from cars`);
+  // 방법 1. JS에서 합치기
+  // 차마다의 정비 건수
+  const { rows: counts } =
+    await pool.query(`select car_id, count(*) as service_count
+                    from maintenance_records
+                    group by car_id`);
+
+  // 각 차에  맞는 개수를 찾아서  붙인다
+  const rows = cars.map((car) => {
+    // counts에서 car_id와 cars의 id가 같은 첫번째 항목을 찾아냄
+    const found = counts.find((c) => c.car_id === car.id);
+    return {
+      ...car,
+      service_count: found ? found.service_count : 0,
+    };
+  });
+
   res.status(200).json(rows);
 });
 
@@ -81,8 +108,8 @@ app.get("/api/records", async (req, res) => {
              join cars c on c.id = m.car_id
              where plate = coalesce($1, plate)`,
     [plate],
-     );
-    /*
+  );
+  /*
      const { rows } =
     await pool.query(`select plate, name, service_date, item, memo, cost
      from maintenance_records m 
@@ -90,7 +117,7 @@ app.get("/api/records", async (req, res) => {
      ${plate ? "where plate = $1::text" : ""}`,
      plate ? [plate] : [],
      ); */
-     /*
+  /*
   let query tevt =`select plate, name, service_date, item, memo, cost
      from maintenance_records m 
      join cars c on c.id = m.car_id`;
@@ -100,8 +127,8 @@ app.get("/api/records", async (req, res) => {
        values.push(plate);
        }
     const { rows } = await pool.query(querytext, values); */
-    res.status(200).json(rows);
-    });
+  res.status(200).json(rows);
+});
 
 // 차량  정보 1개 조회
 // GET http://localhost:4000/api/cars/1
@@ -119,7 +146,8 @@ app.get("/api/records/:id", async (req, res) => {
   const id = Number(req.params.id);
   const { rows } = await pool.query(
     `select * from maintenance_records where id = $1`,
-    [id] );
+    [id],
+  );
   res.status(200).json(rows[0]);
 });
 
@@ -130,65 +158,66 @@ app.get("/api/records/:id", async (req, res) => {
 // insert into cars(plate, name, car_type, production_year, fuel, mileage)
 // Values('111가 1234','투싼','SUV','2025','가솔린','10')
 app.post("/api/cars", async (req, res) => {
-    const { plate, name, car_type, production_year, fuel, mileage } = req.body;
-    // returning의 경우 해당하는 값이 바로 필요한 경우들 사용(대체로 PK인 id값)
-    const{ rows } = await pool.query(
-      `insert into cars(plate, name, car_type, production_year, fuel, mileage) 
+  const { plate, name, car_type, production_year, fuel, mileage } = req.body;
+  // returning의 경우 해당하는 값이 바로 필요한 경우들 사용(대체로 PK인 id값)
+  const { rows } = await pool.query(
+    `insert into cars(plate, name, car_type, production_year, fuel, mileage) 
     values($1, $2, $3, $4, $5, $6) returning id, plate`,
-      [plate, name, car_type, production_year, fuel, mileage],
-    );
-    res.status(201).json({ massage: "차량 등록 완료", rows: rows });
-  });
+    [plate, name, car_type, production_year, fuel, mileage],
+  );
+  res.status(201).json({ massage: "차량 등록 완료", rows: rows });
+});
 
-  // 차량 수정
-  // PUT http://localhost:4000/api/cars/3
-  app.put("/api/cars", async (req, res) => {
-    const id = req.params.id;
-    const { plate, name, car_type, production_year, fuel, mileage } = req.body
-    await pool.query(
-                 `update carsset plate = $1, name = $2,
+// 차량 수정
+// PUT http://localhost:4000/api/cars/3
+app.put("/api/cars", async (req, res) => {
+  const id = req.params.id;
+  const { plate, name, car_type, production_year, fuel, mileage } = req.body;
+  await pool.query(
+    `update carsset plate = $1, name = $2,
                   car_type=$3, production_year = $4,
                   fuel = $5, mileage = $6, where id = $7`,
-          [plate, name, car_type, production_year, fuel, mileage],);
-      //res.status(200).json({message:"차량등록완료"});
-      //status  부분을 생략함ㄴ 알아서 200 코드 성공 처리!
-      //res.json({message: 차량등록완료});
-      res.sendStatus(200); //상태 코드만 보내고자 할 때
-  });
+    [plate, name, car_type, production_year, fuel, mileage],
+  );
+  //res.status(200).json({message:"차량등록완료"});
+  //status  부분을 생략함ㄴ 알아서 200 코드 성공 처리!
+  //res.json({message: 차량등록완료});
+  res.sendStatus(200); //상태 코드만 보내고자 할 때
+});
 
-  // 차량 삭제
-  // DELETE http://localhost:4000/api/cars/2
-  // listen : 서버 켜기 - rpm run dev : nodemon src/app.js
-  app.delete("/api/cars", async (req, res) => {
-    const id = req.parnms.id;
-    // rowCount : 해당 쿼리문을 실행했을 때 반영된 개수
-    const { rowCount} = await pool.query(`delete fron cars where id = $1`, [id]);
-    if (rowCount ===0){
-      const err = new Error ("그런 차량이 없어요 ㅠㅠ");
-      err.status = 404;
-      throw err; //에러를 일부로 발생시키는 
-    }
-   /* if ( rowCount === 0) {
+// 차량 삭제
+// DELETE http://localhost:4000/api/cars/2
+// listen : 서버 켜기 - rpm run dev : nodemon src/app.js
+app.delete("/api/cars/:id", async (req, res) => {
+  const id = req.params.id;
+  // rowCount : 해당 쿼리문을 실행했을 때 반영된 개수
+  const { rowCount } = await pool.query(`delete from cars where id = $1`, [id]);
+  if (rowCount === 0) {
+    const err = new Error("그런 차량이 없어요 ㅠㅠ");
+    err.status = 404;
+    throw err; //에러를 일부로 발생시키는
+  }
+  /* if ( rowCount === 0) {
     return res.status(404).json({ message: "그런 차량이 없어요 ㅠㅠ"});
     } */
-    res.sendStatus(204);
+  res.sendStatus(204);
 });
 
 //라우트에서 난 오류가 전부 여기로 오기 때문에 라우트들 보다는 아래에 있으면 된다
 //app.use 안에 파라미터가 4개면 에러 처리기로 인식한다
-app.use((err, req, res, next) => {
-  if(error.code === '23505'){
+app.use((error, req, res, next) => {
+  console.log(error);
+  if (error.code === "23505") {
     // unique 위반
-    return res.sratus(409).json({ message: "이미 존재하는 값입니다."});
+    return res.sratus(409).json({ message: "이미 존재하는 값입니다." });
   }
-  if(error.status === 404) {
-    return res.status(404).json({ message: error.message});
+  if (error.status === 404) {
+    return res.status(404).json({ message: error.message });
   }
   console.log(error);
   res.status(500).json({ message: "서버 문제 발생", error: error });
-  });
-  
- 
+});
+
 // listen : 서버 켜기 - npm run dev : nodemon src/app.js  (예;가계오픈입니다)
 app.listen(4000, () => {
   console.log("서버 실행 중 : http://localhost:4000");
