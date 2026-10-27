@@ -7,6 +7,9 @@ import { getCars, deleteCar } from "../api/cars.js";
 import { toast } from "@/components/ui/toast";
 
 const Cars = () => {
+   // 수정 중인 차의 정보 -> 객체인 경우는 보통 기본값을 null
+   const[editingCar, setEditingCar]= useState(null);
+
   // 날짜 변환을 위한 함수 'YYYY-MM-DD'
   const toDate = (value) => {
     if (!value) return ""; //null인 경우
@@ -29,13 +32,14 @@ const Cars = () => {
   const handleDelete = async (id) => {
     // try ~ catch : try에서 시도한 코드에서 에러가 나면 catch 구문으로 넘어감
     try {
-         await deleteCar(id);
-         fetchCars(); // 목록 다시 불러오기
+      await deleteCar(id);
+      fetchCars(); // 목록 다시 불러오기
     } catch (error) {
       toast.add({
         type: "error",
         title: "차량 정보 삭제 실패",
-        description: "해당 차량 정보는  정비기록이 있기 때문에 삭제할 수 없습니다!",
+        description:
+          "해당 차량 정보는  정비기록이 있기 때문에 삭제할 수 없습니다!",
       });
     }
   };
@@ -56,12 +60,23 @@ const Cars = () => {
           <button
             type="button"
             className="btn-vehicle-add"
-            onClick={() => setOpen(true)}
+            onClick={() => {
+              setOpen(true);
+              setEditingCar(null); // 등록일 때는 수정 정보 null
+            }}
           >
             차량 등록
           </button>
           {/* 모달에서 open 값이 필요하기 때문에 props로 전달한다 */}
-          <CarsModal open={open} setOpen={setOpen} getCars={fetchCars} />
+          {/* key : 값이 바뀌면 모달을 새로 만든다
+           -> defaultValue가 새 차 값으로 다시 채워짐 */}
+          <CarsModal
+          key={editingCar ? editingCar.id : "new"}
+           open={open}
+            setOpen={setOpen} 
+            getCars={fetchCars}
+            car={editingCar} 
+            />
         </div>
       </section>
       <section className="vehicle-search">
@@ -82,6 +97,10 @@ const Cars = () => {
             lastDate={toDate(car.latest_service_date)}
             lastItem="엔진오일 교환"
             onDelete={() => handleDelete(car.id)}
+            onEdit={() => {
+              setOpen(true);
+              setEditingCar(car); //어느 차를 고칠지 담기!
+            }}
           />
         ))}
       </section>

@@ -170,14 +170,16 @@ app.post("/api/cars", async (req, res) => {
 
 // 차량 수정
 // PUT http://localhost:4000/api/cars/3
-app.put("/api/cars", async (req, res) => {
+app.put("/api/cars/:id", async (req, res) => {
   const id = req.params.id;
   const { plate, name, car_type, production_year, fuel, mileage } = req.body;
   await pool.query(
-    `update carsset plate = $1, name = $2,
+    `update cars 
+    set plate = $1, name = $2,
                   car_type=$3, production_year = $4,
-                  fuel = $5, mileage = $6, where id = $7`,
-    [plate, name, car_type, production_year, fuel, mileage],
+                  fuel = $5, mileage = $6
+    where id = $7`,
+    [plate, name, car_type, production_year, fuel, mileage, id],
   );
   //res.status(200).json({message:"차량등록완료"});
   //status  부분을 생략함ㄴ 알아서 200 코드 성공 처리!

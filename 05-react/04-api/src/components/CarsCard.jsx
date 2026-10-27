@@ -17,6 +17,7 @@ const CarsCard = ({
   lastDate,
   lastItem,
   onDelete,
+  onEdit,
 }) => {
   return (
     // background-color: var(--card-bg) -> bg-[var(--card-bg)]
@@ -56,6 +57,13 @@ const CarsCard = ({
         <span className="last-service-item">{lastItem}</span>
       </div>
       <div className="flex justify-end gap-2 mt-3">
+        {/* 사람이 할 일은 어떤 일을 사용자가 했을 때 어떤 식으로 진행할지를 결정 */}
+        {/* onEdit={() => setOpen(true)} */}
+        <button
+         onClick={onEdit}
+         className="bg-white text-sm px-3 py-1 rounded-md border border-line">
+          수정
+          </button>
         {lastDate === "" ? (
         <button
           onClick={onDelete}

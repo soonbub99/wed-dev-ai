@@ -19,3 +19,9 @@ export const addCar = async (data) => {
 export const deleteCar = async (id) => {
   await axios.delete(`http://localhost:4000/api/cars/${id}`);
 };
+
+// 차량 수정
+// 어느 차인지(id)는 주소에, 바꿀 내용(data)은 본문에
+export const updateCar = async (id, data) => {
+  await axios.put(`http://localhost:4000/api/cars/${id}`, data);
+};
