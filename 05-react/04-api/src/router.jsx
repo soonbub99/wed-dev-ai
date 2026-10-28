@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Cars from "./pages/Cars.jsx";
 import Layout from "./components/Layout.jsx";
 import Login from "./pages/Login.jsx";
+import signup from ""
 
 // 주소(URL) <-> 화면 연결 = 객체 하나 { path, element }
 // path : 주소창에서 locaohost:5173 뒤에 오는 부분
