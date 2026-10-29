@@ -1,8 +1,21 @@
 import "../styles/dashboard.css";
+import { useAuthStore } from "../store/auth.js";
 
 const Dashboard = () => {
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
+
+  const changeName = () => {
+    setUser({...user, name: "이름 바꿈" });
+   // const user = JSON.parse(localStorage.getItem("user"));
+   // localStorage.setItem(
+   //   "user",
+   //   JSON.stringify({ ...user, name: "이름 바꿈" }),
+   // ); --> 새로고침을 해야 수정이 됨 -> zustand 같은 전역 상태관리를 사용하는 이유!
+  };
   return (
     <main>
+      <button type="button" onClick={changeName}>이름 바꾸기 (임시)</button>
       <section className="title-section">
         <div>
           <h1>대시보드</h1>

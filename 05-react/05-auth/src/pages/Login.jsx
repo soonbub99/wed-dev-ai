@@ -2,10 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { login } from "../api/users.js";
 import { toast } from "@/components/ui/toast";
+import { useAuthStore } from "../store/auth.js";
 
 const Login = () => {
   const navigation = useNavigate();
   const [showPw, setShowPw] = useState(false);
+
+  // store에서 user를 바꾸는 함수만 꺼내옴!
+  const saveLogin = useAuthStore((state) => state.login);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,15 +18,23 @@ const Login = () => {
       email: e.target.email.value,
       password: e.target.password.value,
     });
-    if(result === null) {
+    console.log(result);
+    if (result === null) {
       toast.add({ type: "error", title: "가입된 이메일이 없습니다" });
-    } else if(result === "" || result === undefined || result === null) {
-          toast.add({ type: "error", title: "이메일이나 비밀번호가 틀렸습니다" });
-       } else {
-        toast.add({ title: "로그인 성공!" });
-        navigation("/");
+    } else if (result === "" || result === undefined || result === null) {
+      toast.add({ type: "error", title: "이메일이나 비밀번호가 틀렸습니다" });
+    } else {
+      // store에 login 함수 실행 ! -> user 정보 정장, localStorage에 token 저장
+      saveLogin(result.token, result.user);
+      toast.add({ title: "로그인 성공!" });
+      navigation("/");
+      //토큰은 부라우저 저장소(localStorage)에 저장
+      // -> 새로고침을 하든 브라우저 창을 닫든 남아있음
+      //localStorage.setItem("token", result.token);
+      // llcalStorage에는 String(문자열)만 들어가짐
+      // JSON.stringify : 객체 -> 문자로
+      //localStorage.setItem("user", JSON.stringify(result.user));
     }
-   
   };
 
   return (

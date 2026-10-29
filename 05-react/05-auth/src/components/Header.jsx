@@ -1,12 +1,32 @@
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import { User } from "lucide-react";
 // import"../utils/menu.js";
 import { useState, useEffect } from "react";
+import { useAuthStore } from "../store/auth.js";
 
 const Header = () => {
+  const navigation = useNavigate();
+
+  // store에서 꺼내 쓰기
+  const token = useAuthStore((state) => state.token);
+  const user = useAuthStore((state) => state.user);
+  const userLogout = useAuthStore((state) => state.logout);
+
+  //const token = localStorage.getItem("token");
+  // JSON.parse : 문자열 -> 객체로
+  // const user = JSON.parse(localStorage.getItem("user"));
+
+  // 로그아웃 함수 : localStorage에서 토큰 지우고 유저 정보 지우고
+  const logout = () => {
+    userLogout();
+    //localStorage.removeItem("token");
+    //localStorage.removeItem("user");
+    navigation("/");
+  };
+
   const parhname = useLocation();
 
-  // 메쥬가 열렸는지 (true) 닫혔는지(false)
+  // 메뉴가 열렸는지 (true) 닫혔는지(false)
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
@@ -64,10 +84,23 @@ const Header = () => {
           </nav>
         </div>
         <div className="header-right">
-          <div className="no-profile">
-            <User size={20} color="#ffffff" />
-          </div>
-          <span className="user-name">김정비 사장님</span>
+          {token ? (
+            <>
+              <div className="no-profile">
+                <User size={20} color="#ffffff" />
+              </div>
+              <span className="user-name">{user?.name} 사장님</span>
+              <button
+                type="button"
+                onClick={logout}
+                className="cursor-pointer rounded-md border border-line"
+              >
+                로그아웃
+              </button>
+            </>
+          ) : (
+            <Link to="/login">로그인</Link>
+          )}
         </div>
       </header>
       {/* 바깥(어두운 배경) 클릭하면 닫기 */}
