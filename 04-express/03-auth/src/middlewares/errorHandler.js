@@ -1,7 +1,7 @@
 // 미들웨어 : 요청이 들어와서 응답이 나가기 전에 중간에 끼어 있는 함수
 // 에러 처리기 : 오류가 났을 때만 일하는 미들웨어
 export const errorHandler = (error, req, res, next) => {
-  console.log("-------------------");
+  console.log("---------error----------");
   console.log(error);
   console.log("-------------------");
   if (error.status) {

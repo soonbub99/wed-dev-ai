@@ -5,17 +5,28 @@ import { pool } from "../db.js";
 import { supabase } from "../utils/supabase.js";
 
 // insertUser
-export const insertUser = async ({ email, password, name, phone }) => {
+export const insertUser = async ({ email, password, name, phone }, file) => {
   // 이메일, 비밀번호는 Supabase 한테 넘깁니다.
   // 비밀번호는 6글자 이상
-  const { data, error } = await supabase.auth.signUp({ email, password });
+  const { data } = await supabase.auth.signUp({ email, password });
 
-  console.log(data);
+  // supabase storage가 한글명을 못 받습니다. ㅠㅠ -> 날짜 시간으로 파일명 수정
+  const ext = file.originalname.split(".").pop(); //확장자만 가져오려고
+  const path = `${data.user.id}/${Date.now()}.${ext}`; //회원id/지금시각,확장자
+  //스토리지(storage)에 이미지 저장
+  await supabase.storage
+    .from("profiles")
+    .upload(path, file.buffer, { contentType: file.mimetype });
+  // DB에 저장할 URL 가져오면 되지 않을끼?
+  const { data: storage } = supabase.storage
+    .from("profiles")
+    .getPublicUrl(path);
+
   // 나머지 값은  내가  만든  users 테이블에
   await pool.query(
-    `insert into users(id, name, phone)
-    values($1,$2,$3)`,
-    [data.user.id, name, phone],
+    `insert into users(id, name, phone, profile_image)
+    values($1,$2,$3,$4)`,
+    [data.user.id, name, phone, storage.publicUrl],
   );
 
   // 패스워드 암호화! -> '10'은  암호화(해시)할 때 내부적으로 연산을 반복하는 횟수
@@ -45,7 +56,7 @@ export const login = async ({ email, password }) => {
 
   //내가 만든 users 테이블에서 가져움
   const { rows } = await pool.query(
-    `select name from users
+    `select name, profile_image from users
     where id = $1`,
     [data.user.id],
   );
@@ -55,7 +66,12 @@ export const login = async ({ email, password }) => {
 
   return {
     token: data.session.access_token,
-    user: { id: data.user.id, email: data.user.email, name: user.name },
+    user: {
+      id: data.user.id,
+      email: data.user.email,
+      name: user.name,
+      profile_image: user.profile_image,
+    },
   };
 
   // 사용자가 입력한 값이 DB에 저장한값이 맞는지 조회 -> select

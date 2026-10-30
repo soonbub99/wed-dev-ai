@@ -86,9 +86,16 @@ const Header = () => {
         <div className="header-right">
           {token ? (
             <>
-              <div className="no-profile">
-                <User size={20} color="#ffffff" />
-              </div>
+              {user?.profile_image ? (
+                <img
+                  src={user.profile_image}
+                  className="size-8 rounded-full object-cover"
+                />
+              ) : (
+                <div className="no-profile">
+                  <User size={20} color="#ffffff" />
+                </div>
+              )}
               <span className="user-name">{user?.name} 사장님</span>
               <button
                 type="button"

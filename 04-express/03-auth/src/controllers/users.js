@@ -4,7 +4,9 @@ import * as userService from "../services/users.js";
 // signup
 export const signup = async (req, res) => {
   console.log(req.body);
-  await userService.insertUser(req.body);
+  // 앞서 multer로 인해서 파일은 req.file로 되어
+  // multer가 읽은 파일은 req.body가 아니라 req.file에 들어 있음
+  await userService.insertUser(req.body, req.file);
   res.sendStatus(201);
 };
 

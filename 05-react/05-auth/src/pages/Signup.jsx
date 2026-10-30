@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Profiler, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { User } from "lucide-react";
 import { signup } from "../api/users.js";
@@ -6,7 +6,7 @@ import { toast } from "@/components/ui/toast";
 
 const Signup = () => {
   const navigator = useNavigate();
-  
+
   const [showPw, setShowPw] = useState(false);
   const [preview, setPreview] = useState(null);
 
@@ -17,19 +17,31 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // 서버한테 보내는 위치!
-    await signup({
-      email: e.target.email.value,
-      password: e.target.password.value,
-      name: e.target.userName.value,
-      phone: e.target.phone.value,
-    });
+    // 서버한테 보내는 값 중에 이미지 파일이 있는 경우 지금 형태({} : 객체)로 보낼 수 없음!
+    // FormData : 글자와 파일을 값이 담는 택배 상자
+    const formData = new FormData();
+    formData.append("email", e.target.email.value);
+    formData.append("password", e.target.password.value);
+    formData.append("name", e.target.userName.value);
+    formData.append("phone", e.target.phone.value);
+    //사진은 골랐을 때만!
+    const file = e.target.profileImage.files[0];
+    console.log(file);
+    if (file) {
+      formData.append("profile_image", file);
+    }
+
+    await signup(formData);
     toast.add({ title: "회원 가입 완료!" });
     navigator("/login");
   };
 
   return (
     <section className="flex min-h-screen items-center justify-center bg-[var(--primary-navy)] p-6">
+      {/* 서버한테 보내는 값 중에 파일 값을 보내야 한다면
+          encType="multipart/form-data" form 태그에 추가하는 방식
+          -> handleSubmit이라는 함수에서 처리를 하고 있느 상황
+      */}
       <form
         onSubmit={handleSubmit}
         className="flex w-[400px] max-w-full flex-col gap-2.5 rounded-[20px] bg-[var(--card-bg)] p-[35px] shadow-[0_20px_50px_rgba(0,0,0,0.25)]"

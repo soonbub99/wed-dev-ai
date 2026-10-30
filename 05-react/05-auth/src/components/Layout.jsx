@@ -20,9 +20,10 @@ const Layout = () => {
     // 2. 서버한테 토큰으로 정보를 가져움
   }, [token]);
 
+  /*
   if (!token) {
     return <Navigate to="/login" />;
-  }
+  } */
 
   return (
     <>
