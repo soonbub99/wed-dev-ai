@@ -1,0 +1,137 @@
+main {
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 108px 60px 80px;
+  /* 60px(헤더 높이) + 48px(상단 여백) */
+  background-color: var(--background);
+  min-height: 100vh;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.title-section h1 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.title-section p {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+}
+
+.title-section .today-date {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  white-space: nowrap;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  min-width: 0;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-title h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 9px;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-gray);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  display: inline-block;
+}
+
+.status-done {
+  background-color: var(--status-success-bg);
+  color: var(--status-success);
+}
+
+.status-process {
+  background-color: var(--status-blue-bg);
+  color: var(--status-blue);
+}
+
+.status-wait {
+  background-color: var(--status-gray-bg);
+  color: var(--status-gray);
+}
+
+.plate {
+  display: inline-block;
+  background-color: var(--badge-d1-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 92px 24px 60px;
+  }
+}
+
+@media (max-width: 640px) {
+  main {
+    padding: 84px 12px 48px;
+  }
+
+  .title-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

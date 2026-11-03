@@ -1,0 +1,9 @@
+/*
+    CSS Modules : 오직 import한 페이지 컴포넌트에만 반영
+*/
+.card-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
