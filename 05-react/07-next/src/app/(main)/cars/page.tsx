@@ -1,53 +1,20 @@
-"use client";
+// "use client"가 없으면 서버 컴포넌트 ( app 폴더의 기본 )
+// : 서버에서 실행되고  HTML만 브라우저로 갑니다
 import "@/styles/vehicle-management.css";
-import styles from "@/components/Cars.module.css";
-import { useState } from "react";
-import CarsModal from "@/components/CarsModal";
-import CarsCard from "@/components/CarsCard";
-import { toast } from "@/components/ui/toast";
-import type { Car } from "@/types";
+// 서버에서만 도는 데이터 함수 (서버 컴포넌트라 바로 부를 수 있음)
+import { getCars } from "@/lib/data/cars";
+import CarsBoard from "@/components/CarsBoard";
 
-const Cars = () => {
-  // useState(null)만 쓰면 TS는 "항상 null"로 안다 --> 제네릭 표시!
-  const [editingCar, setEditingCar] = useState<Car | null>(null);
-  const toDate = (value: string) => {
-    if (!value) return ""; //null인 경우
-    const day = new Date(value);
-    const month = String(day.getMonth() + 1).padStart(2, "0");
-    const date = String(day.getDate()).padStart(2, "0");
-    return `${day.getFullYear()}-${month}}-${date}`;
-  };
-  const [open, setOpen] = useState(false);
-  const handleDelete = async (id: number) => {};
-
+// 서버 컴포넌트는 async 가능 (클라이언트 컴포넌트는 안 됨)
+const Cars = async () => {
+  // 기존에 useEffect, useState, axios 없이도 await 한 줄!
+  const cars = await getCars();
+  console.log(cars);
   return (
     <main>
-      <section className="title-section">
-        <div>
-          <h1>차량 관리</h1>
-          <p>등록된 고객 차량 0대</p>
-        </div>
-        <div>
-          <button
-            type="button"
-            className="btn-vehicle-add"
-            onClick={() => {
-              setOpen(true);
-              setEditingCar(null); // 등록일 때는 수정 정보 null
-            }}
-          >
-            차량 등록
-          </button>
-          <CarsModal
-            key={editingCar ? editingCar.id : "new"}
-            open={open}
-            setOpen={setOpen}
-            car={editingCar}
-          />
-        </div>
-      </section>
-      <section className={styles["card-section"]}></section>
+      {/* 서버에서 받은 값을 props로 클라이언트에 넘기기 */}
+      <CarsBoard cars={cars} />
     </main>
   );
 };
-export default Cars;
+export default Cars; // /cars의 화면

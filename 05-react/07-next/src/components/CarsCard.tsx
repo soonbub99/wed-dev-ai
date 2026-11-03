@@ -1,13 +1,14 @@
-/*
-  tailuindcss
-  1. npm i tailwindcss @tailwindcss/vite
-  2. vite.config.js 에 tailwinds 관련 설정 코드 추가
-  3. tailwind.css 추가
-  4. main.jsx에 tailwind.css import!
-*/
-
-// props : 부모(Cars)가 넘겨 주는 값
-// 카드마다 다른 부분만 props로 받고 모양은 그대로
+type Props = {
+  plate: string;
+  fuel: string;
+  name: string;
+  year: number;
+  serviceCount: number;
+  lastDate:string;
+  lastItem: string | null;
+  onDelete: () => void; // 받는 값 없고 돌려주는 값(return) 없는 함수
+  onEdit: () => void;
+};
 const CarsCard = ({
   plate,
   fuel,
@@ -18,7 +19,7 @@ const CarsCard = ({
   lastItem,
   onDelete,
   onEdit,
-}) => {
+}: Props) => {
   return (
     // background-color: var(--card-bg) -> bg-[var(--card-bg)]
     // border: 1px solid var(--border)  -> border border-[var(--border)]
