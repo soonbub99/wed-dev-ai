@@ -1,14 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import Link from "next/link.js";
 import { toast } from "@/components/ui/toast";
+import { login } from "./actions";
 
 const Login = () => {
   const [showPw, setShowPw] = useState(false);
-
+  const [state, formAction, pending] = useActionState(login, null);
   return (
     <section className="flex min-h-screen items-center justify-center bg-[var(--primary-navy)] p-6">
-      <form className="flex w-[400px] max-w-full flex-col gap-2.5 rounded-[20px] bg-[var(--card-bg)] p-[35px] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+      <form 
+      action={formAction}
+       className="flex w-[400px] max-w-full flex-col gap-2.5 rounded-[20px] bg-[var(--card-bg)] p-[35px] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
         <div className="text-center text-[1.05rem] font-bold text-[var(--text-primary)]">
           정비노트
         </div>
@@ -61,9 +64,10 @@ const Login = () => {
 
         <button
           type="submit"
+          disabled={pending} //보내는 중엔 못 누르게
           className="mt-1.5 h-[46px] border-none cursor-pointer rounded-[10px] bg-[var(--primary-navy)] text-[0.9rem] font-semibold text-white hover:bg-[var(--navy-dark)]"
         >
-          로그인
+          {pending ? "로그인 중..." : "로그인"}
         </button>
 
         <p className="flex items-center justify-center gap-2.5 text-[0.775rem] text-[var(--text-gray)]">

@@ -1,5 +1,9 @@
+"use client"; //클라이언트 컴포넌트 : 브라우저에서 실행
 import { Car } from "@/types";
 import { X } from "lucide-react";
+import { toast } from "@/components/ui/toast"; // 실패 알림
+//서버 함수 (Server Action) : 클라이언트에서 import 해도 실행은 서버
+import { saveCar } from "@/app/(main)/cars/actions";
 
 type Props = {
   open: boolean;
@@ -8,6 +12,17 @@ type Props = {
 };
 
 const CarsModal = ({ open, setOpen, car }: Props) => {
+  // form action에 넣은 함수 : form을 보내면 FormData가 자동으로 들어옴
+  const handleAction = async (formData: FormData) => {
+    // car 정보가 있다면 수정 -> 그 차 id, 등록이면 null (?? : 앞이 없으면 뒤)
+    const result = await saveCar(car ?.id ?? null, formData);
+    if (result?.error) {
+      // 서버가 {error} 를 돌려주면 실패
+      toast.add({ type: "error", title: result.error });
+      return; // 함수는 return을 만나면 종료
+    }
+    setOpen(false);  // 성공하면 모달 닫기
+  };
   return (
     <div
       onClick={(e) => {
@@ -17,7 +32,8 @@ const CarsModal = ({ open, setOpen, car }: Props) => {
       }}
       className={`vehicle-modal-overlay ${open ? "open" : ""}`}
     >
-      <form className="vehicle-modal">
+      {/* onSubmit --> action : FormData를 보내줌 */}
+      <form className="vehicle-modal" action={handleAction}>
         <div className="vehicle-modal-header">
           {/* 같은 모달이라 제목만 바꿈 */}
           <h2>{car ? "차량 수정" : "차량 등록"}</h2>
@@ -63,6 +79,7 @@ const CarsModal = ({ open, setOpen, car }: Props) => {
             <label htmlFor="carYear">연식</label>
             <input
               id="carYear"
+              name="carYear"
               type="number"
               placeholder="2022"
               defaultValue={car?.production_year}

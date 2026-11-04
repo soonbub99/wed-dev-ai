@@ -1,12 +1,16 @@
 "use client";
-import { Profiler, useState } from "react";
+// useActionState : 서버 함수 결과와 보내는 중인지를 받는 훅 (리액트 19이상)
+import { useActionState, useState } from "react";
 import Link from "next/link";
 import { User } from "lucide-react";
 import { toast } from "@/components/ui/toast";
+import { signup } from "../login/actions";
 
 const Signup = () => {
   const [showPw, setShowPw] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
+  // useActionState(서버함수, 처음결과) -> [결과, form에 줄 함수, 보내는 중인지]
+  const [state, formAction, pending] = useActionState(signup,null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -19,7 +23,7 @@ const Signup = () => {
           encType="multipart/form-data" form 태그에 추가하는 방식
           -> handleSubmit이라는 함수에서 처리를 하고 있느 상황
       */}
-      <form className="flex w-[400px] max-w-full flex-col gap-2.5 rounded-[20px] bg-[var(--card-bg)] p-[35px] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+      <form action={formAction} className="flex w-[400px] max-w-full flex-col gap-2.5 rounded-[20px] bg-[var(--card-bg)] p-[35px] shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
         <div className="text-center text-[1.05rem] font-bold text-[var(--text-primary)]">
           정비노트
         </div>
@@ -131,6 +135,7 @@ const Signup = () => {
           />
         </div>
 
+           {state?.error && <p className="text-red-500">{state.error}</p>}
         <button
           type="submit"
           className="mt-1.5 h-[46px] border-none cursor-pointer rounded-[10px] bg-[var(--primary-navy)] text-[0.9rem] font-semibold text-white hover:bg-[var(--navy-dark)]"
