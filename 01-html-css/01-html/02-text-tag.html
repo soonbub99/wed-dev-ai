@@ -16,37 +16,44 @@
     <h3>Hending 7</h3>
 
     <!-- 문단 태그 : 문장을 묶어서 보여줄 때 사용 -->
-    <p>p 태그는  문단을 구분한다. <br >
-        줄 바꿈이 필요하면 br 태그를 사용한다</p>
-    <hr> 
+    <p>
+      p 태그는 문단을 구분한다. <br />
+      줄 바꿈이 필요하면 br 태그를 사용한다
+    </p>
+    <hr />
     <!-- 구분선 : 문단이나 섹션을 시각적으로 나눌 때 사용 -->
-     <p>
-        <strong>중요한 내용</strong>은 중요한 내용은 strong으로 강조하고,
-         <br/>
-         <em>강조된 내용</em> 강조된 내용은 em으로 표시한다.
-     </p>
-     <p>
-        <mark>강조펴시</mark>강조표시, <small>작은글자</small>, <br >
-        H,<sub>2</sub>O와 2,<sub>3</sub>처럼 첨자를 쓸 수 있다.
-
-     </p>
-     <!-- 인용 태그 -blockquote 문단인용, cote에 출처 URL
-                    -  q 짧은 인용- 따움표에 자동 -->
+    <p>
+      <strong>중요한 내용</strong>은 중요한 내용은 strong으로 강조하고,
+      <br />
+      <em>강조된 내용</em> 강조된 내용은 em으로 표시한다.
+    </p>
+    <p>
+      <mark>강조표시</mark>강조표시, <small>작은글자</small>, <br />
+      H,<sub>2</sub>O와 2,<sub>3</sub>처럼 첨자를 쓸 수 있다.
+    </p>
+    <!-- 인용 태그 - blockquote 문단인용, cite에 출처 URL
+                   - q 짧은 인용- 따움표에 작동
+     -->
     <blockquote cite="https://google.com">
-        시맨틱 HTML</blockquote><q>은 화면에 어떻게 보이는지가 아니라,
-             그내용이 무엇인지를 나타낸다.<br>
-        <cite>- Google</cite>
+      <q>시맨틱 HTML</q>은 화면에 어떻게 보이는지가 아니라, 그내용이 무엇인지를
+      나타낸다.<br />
+      <cite>- Google</cite>
     </blockquote>
-    <!-- code : 코드 조가, pre : 입력한 공백 , 줄바꿈-->
-    <pre><code><console class="log"('hello,')'
-        console.log('worod!'console></code></pre>
-        <p><abbr title="Hyper Text Markup Language">HTML</abbr> 을  배우는 중이다.</p>
-    <!-- 특수문자 :  < : &lt;, > : &gt;
-     &copy; : copyrigyt, &nbsp; : 공백 하나 -->
-     <p>a &lt b, a &gt b<br />
-      &copy;2026</p>
-     
-     
+    <!-- code : 코드 조가, pre : 입력한 공백 , 줄바꿈 그대로-->
+    <pre><code>
+console.log('hello,');
+console.log('worod!');</code></pre>
 
+    <!-- addr 약어 태그 -->
+    <p>
+      <abbr title="Hyper Text Markup Language">HTML</abbr> 을 배우는 중이다.
+    </p>
+
+    <!-- 특수문자 :  < : &lt;, > : &gt;
+     &copy; : copyrigyt(c)모양, &nbsp; : 공백 하나 -->
+    <p>
+      a &lt b, a &gt b<br />
+      &copy; &nbsp;&nbsp;&nbsp; 2026
+    </p>
   </body>
 </html>
