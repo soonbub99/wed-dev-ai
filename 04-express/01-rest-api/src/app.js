@@ -19,7 +19,7 @@ npm i -D nodemon
 
 폴더와 파일 구조
 backend/
-   - node_moduoes <-무수히 많은 설치한 패키지에 해당하는 폴더와 파일들이 존재
+   - node_modules <-무수히 많은 설치한 패키지에 해당하는 폴더와 파일들이 존재
      src <-소스 코드들이 들어가는 폴더 (이거만 신경쓰시면 됩니다.!)
      .env <- DB_URL (보안상의 이유)
      .gitignore <- .env와 node_modules (깃허브에는 올리지 않기 위해)
