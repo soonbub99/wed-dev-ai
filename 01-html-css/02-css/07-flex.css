@@ -13,7 +13,7 @@
 .column {
   flex-direction: column;
 }
-/* 부모한테
+/* 부모한테 
    justify-conthnt
    - start(기본값),end,center,
    - spacd-between(양끈),space-around,space-evenly
@@ -63,7 +63,7 @@
 }
 .flex-1{
     flex: 1;
-    /* = flex : 아이템들을 균등하게 */
+    /* = flex : 1 1 0; 아이템들을 균등하게 */
 }
 .order-self{
     height: 200px;
@@ -73,6 +73,6 @@
     order: -1;
     /* 기본값이 0, 작은수록 앞으로 */
 }
-.self{
+.self {
     align-self: end;
 }
