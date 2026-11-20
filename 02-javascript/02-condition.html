@@ -14,7 +14,7 @@
         조건이 true
         } else{ 조건이 false }
         */
-       let age = 15;
+       let age = 12;
        // 나이가 19세보다 많으면 "성인", 아니면 "미성년자"
        //if(나이가 19세보다 많으면){console.l("성인")}
         if(age>19){
@@ -101,14 +101,14 @@
             // 아이디가 user1, 비밀번호가 1234인 경우만 "로그인 성공"
             // 비밀번호가 틀리면 "비밀번호가 틀렸습니다."
             // 아이디가 틀리면 "아이디를 잘못 입력 하셨습니다."
-            const id = "user11";
-            const pw = "12345";
+            const id = "user1";
+            const pw = "1234";
             if(id === "user1" && pw === "1234") {
                 console.log("로그인 성공");
             } else if( id === "user1" && pw !== "1234") {
                 console.log("비밀번호가 틀렸습니다.");
             } else if ( id !=="user1" && pw === "1234") {
-                console.log("아이디를 ")
+                console.log("아이디를 잘못 입력하셨습니다");
             }
             //효율적으로 코드를 짜는 방법 중에 오히려 잘못된 경우들
             if(id !== "user1") {
