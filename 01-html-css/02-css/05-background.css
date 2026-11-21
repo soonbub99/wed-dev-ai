@@ -1,7 +1,8 @@
 .box {
   height: 200px;
 }
-/* background-color*/
+
+/* background-color: 배경색 하나(-color 생략 가능) */
 .bg-color {
   background-color: blue;
 }
@@ -9,7 +10,7 @@
 .pic {
   background-image: url(../assets/panda.png);
 }
-/* background-repeat+positidn*/
+/* background-repeat + positidn*/
 .bg-norepeat {
   background-color: #333;
   background-repeat: no-repeat;

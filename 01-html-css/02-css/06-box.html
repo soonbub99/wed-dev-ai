@@ -9,19 +9,22 @@
   <body>
     <h2>width/height</h2>
     <div class="box w-fixed">px 단위는 고정길이</div>
-    <div class="box w-parent">% 단위는 가변길이</div>
+    <div class="box w-percent">% 단위는 가변길이</div>
+
     <h2>padding - 테두리와 내용 사이(박스 안쪽 여백)</h2>
     <div class="box pad-all">padding: 20px</div>
     <div class="box pad-parts">padding: 30px 20px 40px 10px</div>
+
     <h2>margin- 요소와 요소 사이(박스 바깥 여백)</h2>
     <div class="box mar-all">margin:24px</div>
+    <!-- margin collapse(상쇄):두 박스 사이가 더해지는 게 아니라 큰 값 하나로 합쳐진다.-->
     <div class="box mar-all" style="margin-top: 48px">margin:24px</div>
-    <div class="box mar-auto">width:300px+margin:auto:가운데</div>
-    <!--margin collapse(상쇄) : 두 박스 사이가 더해지는 게 아니라 큰 갖ㅅ 하나로 합쳐진다. -->
+    <div class="box mar-auto">width:300px + margin:auto:가운데</div>
+    
     <h2>border- 두께/종류(solid dashed dotted)/ 색</h2>
-    <div class="box bd-solid"></div>
-    <div class="box bd-round"></div>
-    <div class="box bd-circle"></div>
+    <div class="bd-solid"></div>
+    <div class="bd-round"></div>
+    <div class="bd-circle"></div>
     <h2>box-sizing:border-box</h2>
     <div class="box bs-content">content-box</div>
     <div class="box bs-border">border-box</div>

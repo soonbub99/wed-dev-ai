@@ -1,5 +1,6 @@
 /* 
 사람{
+  // 특징들 = 변수
    이름,
    나이,
    사는곳,
@@ -10,21 +11,21 @@
    씻는다,
    옷입는다,
    나간다
-
    } 
 */
-// 변수끼리 서로 관련이 있다는게 보이지
+// 변수끼리 서로 관련이 있다는게 보이지 않아요
 const name = "성시원";
 const age = 10;
 const addr = "서울";
-// 벼열은 서로 관련이 있다는게 0, 각 값들이 뭘 의미하는지 모름
+// 배열은 서로 관련이 있다는게 알게는데, 각 값들이 뭘 의미하는지 모름
 const personArr = ["성시원", 10, "서울"];
 
+//객체
 const person = {
   // 변수 (키 : 값)
-  name: "성시원",
-  age: 10,
-  addr: "서울",
+  name : "성시원",
+  age : 10,
+  addr : "서울",
   // 함수
   hello() {
     // this : 본인 자체
@@ -66,7 +67,7 @@ person3.hello();
 const { name: name1, age: age1 } = person1;
 console.log(name1, age1);
 
-// 생성자 함수, 클래스 -> 변수와 함수는 소문자, 클래스는 대문자!
+// 생성자 함수, 클래스(객체) -> 변수와 함수는 소문자, 클래스는 대문자!
 function Person(name, age) {
   this.name = name;
   this.age = age;
@@ -74,13 +75,14 @@ function Person(name, age) {
     console.log(`안녕? ${this.name}야, 나이는 ${this.age}살이야`);
   };
 }
+
 const p1 = new Person("김진아", 5);
 p1.hello();
 
 // 함수 형식보다는 클래스 형식을 더 사용!
 class Person2 {
   // 객체 생성시 호출
-  constructor() {
+  constructor(name, age) {
     this.name = name;
     this.age = age;
   }
@@ -88,16 +90,16 @@ class Person2 {
     console.log(`안년 ? ${this.name}야, 나이는 ${this.age}살이야`);
   }
 }
-
-person2.hello();
+const p2 = new Person2("김소연",2);
+p2.hello();
 
 // 내장 객체
-// Set
+// Set-중복 제거용
 const arr = [1, 2, 2, 3, 3, 4, 4, 4, 5];
 console.log(arr);
 const unique = new Set(arr);
 console.log(unique);
-console.log([...unique]); // 다시 배열로
+console.log([...unique]); // 다시 배열로[] 바뀌다,스프레드 연산자 ... 안에 값들만 가져오는것
 
 //Math- 계산용(수학적인 것들)
 console.log(Math.max(5, 7, -1, -8)); // 최대값
@@ -125,7 +127,7 @@ console.log(Math.floor(Math.random() * 11) + 5);
 // Date 객체
 const now = new Date();
 console.log(now);
-// gatMonth : 0~11월
+// gatMonth : 0~11월 표현함 월만 그래요 다른 숫자는 관계 없음
 console.log(
   `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일`,
 );
@@ -143,19 +145,19 @@ setTimeout(() => {
 
 //일정 시간마다 반복 실행
 let sec = 0;
-setInterval(() => {
+const timer = setInterval(() => {
   console.log(`${++sec}초!`);
-}, 1000);
 
 if (sec === 5) {
   clearInterval(timer);
-}
+  }
+}, 1000);
 
 // JSON(JataScript Object Notation)
 // 서버에서  클라이언트로 JSON 객체로 통신
-// 객체 -> 문자열
+// JSON객체 -> 문자열
 const jsonStr = JSON.stringify(person);
-console.log(typeof jsonStr);
+console.log(typeof jsonStr); //string
 // 문자열 -> 객체
 const jsonObj = JSON.parse(jsonStr);
 console.log(typeof jsonObj); // opject

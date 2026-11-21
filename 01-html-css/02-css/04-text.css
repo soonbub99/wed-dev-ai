@@ -1,29 +1,32 @@
-/* font-family : 앞에서부터 있는 글꼴 사용, */
-.ff-sans{
-    font-family: sans-serif;
+/* font-family : 앞에서부터 있는 글꼴 사용, 없으면 다음 것 */
+.ff-sans {
+    font-family: "돋움", sans-serif;
 }
-.ff-serly{
+.ff-serly {
     font-family: "궁서", serif;
 }
+.ff-web {
+   font-family: "Nanum Myeongjo", serif;
+}
 /* font-size */
-.fs-px{
+.fs-px {
     font-size:20px;
 }
-.fr-rem{
-    /* 16px * 1.5=24px */
+.fr-rem {
+    /* 16px * 1.5 = 24px */
     font-size:1.5rem;
 }
-/* font-weoght */
-.fw-bold{
+/* font-weight */
+.fw-bold {
     /* bold는 숫자로 700이랑 같음 */
     font-weight: bold;
 }
-.fw-thin{
+.fw-thin {
     font-weight: 300;
 }
 /* line-height : 많이 쓰이는 기준이 1.5~1.8 */
 .lh{
-    line-height: 2;
+    line-height: 1.8;
 }
 /* text-align : lift(기본), center, right, justify */
 .ta-center{
@@ -35,22 +38,23 @@
 /* color */
 .c-name{
     /* 브라우저가  인식하는 기본 색상명(wed safe colors
-    216가지 */
+    216가지) */
     color: crimson;
 }
 .c-hex{
-    /* #RRGGBB - 범위 : 000000~ffffff */
+    /* 16진수 #RRGGBB - 범위 : 000000~ffffff */
     color:#2f6fed;
 }
 .c-rgb{
-    /* red(0~255),green(0~255), blue(0~255) */
-    color: (47,111,237)
-    background:rgba(0, 0, 0, 5);
+    /* red(0~255),green(0~255), blue(0~255) :숫자로 표시하는 방법 */
+    color: rgb(47,111,237);
+    background: rgba(0, 0, 0, 0.5); 
 }
 .c-hsl{
     /* 색상환(0~360), 채도(0~100%), 밝기(0~100%) */
     color: hsla(200, 50%, 50%, 0.2);
 }
+/* text-decoration */
 .td-underline{
     text-decoration: underline;
 }
