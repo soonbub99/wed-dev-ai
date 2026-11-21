@@ -96,7 +96,7 @@ pTarget.remove();
 // 문자열 분리 ul 출력
 const la = document.querySelector("#la");
 const result5 = document.querySelector("#result5");
-const stringsp = () => {
+const stringSplit = () => {
   const arr = la.textContent.split(",");
   const ul = document.createElement("ul");
   for (const value of arr ) {
