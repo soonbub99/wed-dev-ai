@@ -19,6 +19,7 @@ const quotes = [
 
 //랜덤 배경
 //랜덤 숫자 0~255:math.random 사용
+// const randonBg = () => {} 처음에 함수를 만들어 준다
 const randomBg = () => {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
