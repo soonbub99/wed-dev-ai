@@ -12,3 +12,12 @@ console.log(`[A-Za-z가-힣]문자셋 : ${/^[A-Za-z가-힣]+$/.test("가aFG다")
 console.log(`{2,4} 반복 : ${/^a{2,4}$/.test("aaaaa")}`); // 숫자는 무족건 붙여 쓰야함
 console.log("사과, 바나나, 오렌지".split(/,/));
 console.log("010-1234-5678".replace(/-/g,"")); //global (전부)
+
+// 입력할 때마다 검사 + Enter 시 결과 출력
+const phone = document.getElementById("phone");
+const phoneRegex = /^010-\d{4}-\d{4}$/;
+const check = () => `${phone.value} : ${phoneRegex.test(phone.value)}`;
+phone.addEventListener("input", () => console.log(`입력 검사 - ${check()}`));
+phone.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") console.log(`Enter 검사 - ${check()}`);
+});
