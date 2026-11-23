@@ -68,6 +68,10 @@ const keyResult = document.querySelector("#keyResult");
 // keydown, keypress, keyup 세가지 있음
 key.addEventListener("keydown", (e) => {
   keyResult.textContent = e.key;
+
+  if (e.repeat) {
+    console.log("키를 누르는 중입니다");
+  }
 });
 
 const move = document.querySelector(".moveBox");

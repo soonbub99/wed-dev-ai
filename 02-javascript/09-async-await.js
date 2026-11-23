@@ -51,7 +51,7 @@ document.querySelector("#async").addEventListener("click", async () => {
 });
 
 // fetch - 서버에서 데이터 하나 가져오기
-// 자바스크립트에서 서버로 요청을 보내ㅣ고 응답을 받을 수 있도록 해주는 함수
+// 자바스크립트에서 서버로 요청을 보내고 응답을 받을 수 있도록 해주는 함수
 document.querySelector("#fetch").addEventListener("click", async () => {
   const result = document.querySelector("#fetchResult");
   const response = await fetch("https://api.tvmaze.com/shows/1");
