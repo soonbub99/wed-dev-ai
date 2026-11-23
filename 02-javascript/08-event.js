@@ -1,5 +1,6 @@
-//script가  body보다 먼저(head) 있으면 아직 안 만들어진 요소를 찾다가 null
-// DOWContetedLoaded를 사용하면 HTML 파싱이 끝난 뒤 실행되도록 감싸 줌
+//script가  body보다 먼저(head) 있으면 아직 안 만들어진 요소를 찾다가 null이 됩니다
+//이때 DOWContetedLoaded를 사용하면 HTML 파싱이 끝난 뒤 실행되도록 감싸 줌
+//script의 위치와 상관 없이 입력 될수 있도록 하기위해
 window.addEventListener("DOMContentLoaded", () => {});
 const h1 = document.querySelector("h1");
 console.log(h1);
@@ -43,17 +44,18 @@ document.addEventListener("mousemove", (e) => {
 const wheel = document.querySelector("#wheel");
 const scroll = document.querySelector("#scroll");
 
-document.addEventListener("wheel", () => {
-  console.log(e.deltay); //위로 올라갈수록 - , 아래로 내릴수록 +
-  if (e.deltay < 0) {
+document.addEventListener("wheel", (e) => {
+ //위로 올라갈수록 - , 아래로 내릴수록 +
+  if (e.deltaY < 0) {
     wheel.textContent = "휠을 위로 올림!";
+  } else {
     wheel.textContent = "휠을 아래로 내림!";
   }
 });
 document.addEventListener("scroll", () => {
   const scrollHeight = document.documentElement.scrollHeight; //전체 높이
   const innerHeight = window.innerHeight; //화면에 보이는 높이
-  const scrolly = window.scrolly; //스크롤 위치
+  const scrolly = window.scrollY; //스크롤 위치
   // scrolly + innerHeight === scrollHeight
   const totalHeight = scrollHeight - innerHeight;
   const width = (scrolly / totalHeight) * 100;
@@ -74,18 +76,21 @@ let x = 0;
 document.addEventListener("keyup", (e) => {
   if (e.key === "ArrowUp") {
     y -= 50;
+  } else if (e.key === "ArrowDown") {
+    y += 50;
   } else if (e.key === "ArrowLeft") {
     x -= 50;
   } else if (e.key === "ArrowRight") {
     x += 50;
   }
-  (move, (style.top = `${y}px`));
+  move.style.top = `${y}px`;
   move.style.left = `${x}px`;
 });
 
 // 품 이벤트
 const form = document.querySelector("#form");
 const input = document.querySelector("#input");
+const inputResult = document.querySelector("#inputResult");
 form.addEventListener("submit", (e) => {
   if (input.value === "") {
     e.preventDefault();
@@ -104,6 +109,7 @@ select.addEventListener("change", (e) => {
 
 const openModal = document.querySelector("#openModal");
 const modalOverlay = document.querySelector("#modalOverlay");
+const closeModal = document.querySelector("#closeModal");
 openModal.addEventListener("click", () => {
   modalOverlay.classList.add("open");
 });

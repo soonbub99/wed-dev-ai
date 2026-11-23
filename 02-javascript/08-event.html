@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>이벤트</title>
     <link rel="stylesheet" href="./08-event.css" />
-    <!-- defer은 DOMContentLoaded-->
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
@@ -16,6 +15,7 @@
     />
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <!-- defer은 DOMContentLoaded랑 같은 효과-->
     <script src="./08-event.js" defer></script>
   </head>
   <body>
@@ -26,8 +26,9 @@
       <div class="box" id="double">Double Click!</div>
       <div class="box" id="right">Right Click!</div>
       <div class="box" id="hover">Hover!</div>
-      <div id="mouseDot"></div>
     </section>
+    
+      <div id="mouseDot"></div>
 
     <h2>스크롤 이벤트</h2>
     <div id="wheel">휠을 움직여보세요!</div>
@@ -39,15 +40,16 @@
     <div class="moveBox"></div>
 
     <h2>품 이벤트</h2>
-    <form action="" id="form"></form>
-    <input type="text" id="input" />
-    <p id="inputResult"></p>
-    <select name="" id="select">
-      <option value="사과">사과</option>
-      <option value="블루베리">블루베리</option>
-    </select>
-    <p id="selectResult"></p>
-    <button type="submit">제출</button>
+    <form action="" id="form">
+      <input type="text" id="input" />
+      <p id="inputResult"></p>
+      <select name="" id="select">
+        <option value="사과">사과</option>
+        <option value="블루베리">블루베리</option>
+      </select>
+      <p id="selectResult"></p>
+      <button type="submit">제출</button>
+    </form>
 
     <h2>모달</h2>
     <button id="openModal">모달 열기</button>
@@ -74,7 +76,7 @@
       <button class="tab-btn" :class="{active: tab === 'a'}" @click="tab='a'">
         소개
       </button>
-      <button class="tab-btn" :class="{active: tab === 'b'}" @click="tab='b">
+      <button class="tab-btn" :class="{active: tab === 'b'}" @click="tab='b'">
         예약
       </button>
       <div x-show="tab ==='a'">소개 내용입니다.</div>
@@ -92,7 +94,7 @@
           섹션 1
         </button>
         <div
-          class="accordion-boby"
+          class="accordion-body"
           :class="{open: open === 0}"
           x-show="open === 0"
         >
@@ -108,7 +110,7 @@
           섹션 2
         </button>
         <div
-          class="accordion-boby"
+          class="accordion-body"
           :class="{open: open === 1}"
           x-show="open === 1"
         >
