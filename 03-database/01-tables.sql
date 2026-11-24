@@ -12,9 +12,9 @@ DBMS(Database Management System) : 데이터베이스 관리 시스템
 SQL(Structured Query Language)
 : 관계형 데이터베이스에서 데이터를 조회하거나 조작하기 위해 사용하는 표준 검색 언어
 
-DDL (Data=Definition Langugage) : 데이터 정의어
+DDL (Data Definition Langugage) : 데이터 정의어
  - DBMS의 구조를 정의하거나 변경, 삭제하기 위해 사용하는 언어
- (CREATE : 생성, ALTER : 수정, EROP : 삭제 )
+ (CREATE : 생성, ALTER : 수정, DROP : 삭제 )
 
 */
 -- CREATE TEBLE은 표 이름, 괄호 안의 열 이름과 자료형, 제약조건을 정한다.
