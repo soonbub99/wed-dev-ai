@@ -1,7 +1,6 @@
 -- DML 중 하나 이기도 하면서, DQL(Data Query Language) : 데이터 조회
--- * : 모든 column들 
-select * 
-from cars;
+-- * 는 모든 column들 
+select * from cars;
 
 -- 내가 필요한 column만 기재
 select name, plate, mileage from cars;
@@ -9,7 +8,7 @@ select name, plate, mileage from cars;
 -- as : 결과에 보일 column 별칭 부여
 select name as 차종, mileage as 주행거리 from cars;
 
--- 계산식도 가능하다
+-- 계산식도 가능하다(부가세 적용할때 적용가능)
 select item, cost, cost * 1.1 as 부가세포함
 from maintenance_records;
 
@@ -60,7 +59,7 @@ select plate, substring(plate from 6 for 4) as 뒷번호 from cars;
 select plate, position(' ' in plate) +1,
 substring(plate from position(' ' in plate) +1 for 4) as 뒷번호
 from cars;
--- split_part(글자, '구분자', 번호) : 구분자로 나눈 몇 번째
+-- split_part(글자, '구분자', 번호) : 구분자로 나눈 몇 번째 ()''공백을 기준으로 나눈겠다)
 select plate, split_part(plate, ' ',2)as 뒷번호 from cars;
 
 -- 숫자 : round - 반올림(소수점가능)
@@ -69,7 +68,7 @@ round(avg(cost)),
 round(avg(cost),2)
 from maintenance_records;
 
--- 날짜 : extract(year/month/day.. from 글자(크럼명)) : 년/월/일 ..
+-- 날짜 : extract(year/month/day.. from 글자(크럼명)) : 년/월/일 .. 각각을 가져오기 위함
 select service_date, extract(year from service_date) from maintenance_records;
 select current_date, now(); --현재 날짜
 select current_date + 7 as 일주일뒤,
@@ -87,7 +86,9 @@ select name, mileage,
   end
 from cars;
 
-
+-- 기본 함수들, 조건들 보통은JavaScipt에서 구현이 가능함으로
+-- 검색할 때 사용하는 like + % -> 글자 이어붙이기
+select name || '(' || plate || ')' from cars;
 
 
 

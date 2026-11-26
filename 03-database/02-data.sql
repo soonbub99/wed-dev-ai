@@ -24,7 +24,7 @@ values ('99마 0000', null);
 insert into maintenance_records (car_id, service_date, item, cost)
 values (99,'2026-10-13','엔진오일 교환', 50000);
 
--- check 제약조건 : 음수 비용
+-- check 제약조건 : 음수 비용 : check constraint 제약조건이 거림
 insert into maintenance_records (car_id, service_date, item, cost)
 values (1, '2026-10-14','엔진오일 교환', -50000);
 
@@ -52,11 +52,11 @@ where car_type ='승용'; -- 조건에 맞으면 여러 행 수정 가능 (추�
 -- delete
 delete from cars where id = 3;
 
--- 부모를 삭제하려고 하면? 다른 테이블 기록들로 인해 못 지원다.
--- 만약 삭제하고 싶다면 자식들릐 기록들을 먼저 삭제해야 한ㅇ다(기본 : on delete)
+-- 부모를 삭제하려고 하면? 다른 테이블 기록들로 인해 못 지운다.
+-- 만약 삭제하고 싶다면 자식들의 기록들을 먼저 삭제해야 한ㅇ다(기본 : on delete)
 delete from cars where id =1;
 
--- on delete cascade 로 인해 consultation_items도 삭제
+-- on delete cascade 로 인해 consultation_items도 삭제 - 전부다 삭제됨으로...
 delete from consultations where id =1;
 
 insert into maintenance_records (car_id, service_date, item, cost)
@@ -75,7 +75,7 @@ values (1, '타이어 공기압 경고등', 0);
 -- truncate 사용시 restart identity는 PK를 1부터 다시 시작
 truncate maintenance_records restart identity;
 
--- delete에서 where를 빼먹으면 전부 다 삭제되므로 주의!
+-- delete에서 where를 빼먹으면 전부 다 삭제되므로 주의!!
 delete from cars;
 
 

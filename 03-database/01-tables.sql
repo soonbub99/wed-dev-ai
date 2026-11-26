@@ -47,7 +47,7 @@ alter table stores enable row level security;
 
 create table orders(
     id bigint primary key,
-    cuwtomer_id bigint not null neferences customers(id),
+    customer_id bigint not null neferences customers(id),
     store_id bigint not null references stores(id),
     food_name text not null,
     food_price integer not null check (food_price >= 0),
